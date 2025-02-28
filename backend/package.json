@@ -1,0 +1,27 @@
+{
+  "name": "voxec",
+  "version": "1.0.0",
+  "description": "Chat em tempo real",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LucasPaulo001/VoxEC.git"
+  },
+  "author": "Lucas Paulo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LucasPaulo001/VoxEC/issues"
+  },
+  "homepage": "https://github.com/LucasPaulo001/VoxEC#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-handlebars": "^8.0.1",
+    "socket.io": "^4.8.1"
+  }
+}
