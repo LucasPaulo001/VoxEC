@@ -1,0 +1,87 @@
+:root{
+    --colorBottons: #4F30BF;
+    --colorBottons02: #e951fd;
+    --backgroun01: #292259;
+}
+
+.windowLogin{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-image: url('/assets/images/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.btnAction{
+    color: var(--colorBottons);
+    background-color: white;
+    border: 1px solid var(--colorBottons);
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    transition: .2s ease-in-out;
+}
+.btnAction:hover{
+    background-image: linear-gradient(to right, var(--colorBottons), var(--colorBottons02));
+    color: white;
+    border: 1px solid transparent;
+}
+.btns{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 15px;
+}
+.login, .logo{
+    height:95%;
+    width: 50%;
+}
+.login{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.logo{
+    background-color: #29225970;
+    color: white;
+    backdrop-filter: blur(1px);
+    border-radius: 10px 0 0 10px;
+    border: 1px solid white;
+}
+.title{
+    text-align: center;
+}
+.iconForm{
+    position: absolute;
+    bottom: 6px;
+    padding-left: 5px;
+}
+.inputContent{
+    position: relative;
+}
+input{
+    text-indent: 25px;
+}
+.inputContent:hover .iconForm{
+    color: var(--colorBottons);
+    transition: .4s ease-in;
+}
+
+@media(max-width: 640px){
+    .windowLogin{
+        flex-direction: column;
+    }
+    .logo{
+        display: none;
+    }
+    .login{
+        width: 100%;
+        border-radius: 20px;
+        box-shadow: 1px 1px 20px 1px;
+    }
+}
