@@ -19,9 +19,16 @@
   },
   "homepage": "https://github.com/LucasPaulo001/VoxEC#readme",
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
+    "connect-flash": "^0.1.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-handlebars": "^8.0.1",
+    "express-session": "^1.18.1",
+    "mongoose": "^8.11.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
     "socket.io": "^4.8.1"
   }
 }

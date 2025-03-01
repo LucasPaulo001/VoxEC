@@ -3,16 +3,17 @@
     --colorBottons02: #e951fd;
     --backgroun01: #292259;
 }
-
+body{
+    background-image: url('/assets/images/background.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 .windowLogin{
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 20px;
-    background-image: url('/assets/images/background.png');
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 .btnAction{
     color: var(--colorBottons);

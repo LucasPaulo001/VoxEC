@@ -8,14 +8,14 @@
         <div class="mb-3">
             <h3>Faça seu Cadastro!</h3>
         </div>
-        <form action="/" method="post">
+        <form action="/user/register" method="post">
             <div class="mb-3">
                 <label for="username">Nome de usuário:</label>
                 <div class="inputContent">
                     <span class="material-symbols-outlined iconForm">
                         person
                     </span>
-                    <input type="text" class="form-control" placeholder="Seu nome de usuário" name="username" id="username">
+                    <input type="text" required class="form-control" placeholder="Seu nome de usuário" name="username" id="username">
                 </div>
             </div>
             <div class="mb-3">
@@ -24,7 +24,7 @@
                     <span class="material-symbols-outlined iconForm">
                         mail
                     </span>
-                    <input type="email" class="form-control" placeholder="Seu E-mail..." name="email" id="email">
+                    <input type="email" required class="form-control" placeholder="Seu E-mail..." name="email" id="email">
                 </div>
             </div>
             <div class="mb-3">
@@ -33,7 +33,7 @@
                     <span class="material-symbols-outlined iconForm">
                         lock
                     </span>
-                    <input type="password" class="form-control" placeholder="Sua Senha..." name="password" id="password">
+                    <input required type="password" class="form-control" placeholder="Sua Senha..." name="password" id="password">
             
                 </div>
             </div>
@@ -55,7 +55,7 @@
                             calendar_month
                         </span>
                     </span>
-                    <input type="date" class="form-control" placeholder="Repita a senha informada" name="birth" id="birth">
+                    <input required type="date" class="form-control" placeholder="Repita a senha informada" name="birth" id="birth">
             
                 </div>
             </div>
