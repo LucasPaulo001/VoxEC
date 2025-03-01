@@ -22,11 +22,13 @@
     height: 40px;
     border-radius: 10px;
     transition: .2s ease-in-out;
+    box-shadow: 4px 4px;
 }
 .btnAction:hover{
     background-image: linear-gradient(to right, var(--colorBottons), var(--colorBottons02));
     color: white;
     border: 1px solid transparent;
+    box-shadow: 4px 4px 9px 0px var(--colorBottons);
 }
 .btns{
     display: flex;
