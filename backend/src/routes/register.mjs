@@ -54,7 +54,7 @@ register.post('/register', (req, res) => {
             })
 
             //Gerando link de verificação
-            const link = `http://localhost:8080/user/verifyEmail/${token}`
+            const link = `https://voxec.onrender.com/user/verifyEmail/${token}`
 
             //Conteúdo do email
             const mailOption = {
