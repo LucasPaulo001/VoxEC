@@ -1,7 +1,11 @@
 import { Router } from "express"
 import User from "../models/User.mjs"
 import bcrypt from "bcryptjs"
+import nodemailer from "nodemailer"
+import crypto from "crypto"
 const register = Router()
+import dotenv from "dotenv"
+dotenv.config()
 
 register.get('/register', (req, res) => {
     res.render('pages/register')
@@ -20,6 +24,9 @@ register.post('/register', (req, res) => {
         return res.redirect(req.headers.referer)
     }
 
+    //Gerando tokken de verificação
+    const token = crypto.randomBytes(32).toString('hex')
+
     //Criptografia de senha
     const saultRounds = 10
     bcrypt
@@ -30,13 +37,38 @@ register.post('/register', (req, res) => {
             username: username,
             email: email,
             password: hash,
-            birth: birth
+            birth: birth,
+            tokenVerificacao: token,
+            emailVerificado: false
         })
 
         //Salvando usuário no banco de dados
         newUser.save()
+        .then((newUser) => {
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.EMAIL_USER,
+                    pass: process.env.PASS_USER
+                }
+            })
+
+            //Gerando link de verificação
+            const link = `http://localhost:8080/user/verifyEmail/${token}`
+
+            //Conteúdo do email
+            const mailOption = {
+                from: process.env.EMAIL_USER,
+                to: newUser.email,
+                subject: 'Confirmação de E-mail',
+                text: `Olá, ${newUser.username}, seja bem vido à VoxEC\n\nPara validar seu E-mail clique no link logo abaixo, é rápido! 😀\n\n${link}\n\nApós validar você já pode fazer o seu login, nos vemos por lá!`
+            }
+
+            //Enviando email
+            return transporter.sendMail(mailOption)
+        })
         .then(() => {
-            req.flash('success_msg', 'Cadastro realizado com sucesso!')
+            req.flash('success_msg', 'Cadastro realizado com sucesso, verifique seu E-mail para validar sua conta!')
             return res.redirect('/')
         })
         .catch((error) =>{
@@ -48,7 +80,29 @@ register.post('/register', (req, res) => {
     .catch((error) =>{
         console.log(`Erro ao tentar criptografar senha: ${error}`)
     })
+})
 
+register.get('/verifyEmail/:token', (req, res) => {
+    const {token} = req.params
+
+    User.findOne({tokenVerificacao: token})
+    .then((usuario) => {
+        if(!usuario){
+            return res.status(400).send('Link de validação inválido ou expirado!')
+        }
+        usuario.emailVerificado = true
+        usuario.tokenVerificacao = null
+
+        return usuario.save()
+    })
+    .then(() => {
+        res.send('email validado com sucesso!')
+    }).catch((error) => {
+        console.log(`erro: ${error}`)
+        if(!res.hasHeader){
+            res.status(500).send(`Erro ao validar e-mail ERRO: ${error}`)
+        }  
+    })
 })
 
 export default register

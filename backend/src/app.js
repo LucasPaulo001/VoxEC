@@ -64,6 +64,12 @@ app.use(
     })
 )
 
+//Configuração do passport
+import { passportConfig } from './configs/auth.mjs'
+passportConfig(passport)
+app.use(passport.initialize())
+app.use(passport.session())
+
 //Configuração das mensagens flash
 app.use(flash())
 
@@ -71,6 +77,7 @@ app.use(flash())
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg')
     res.locals.error_msg = req.flash('error_msg')
+    res.locals.user = req.user
 
     next()
 })
@@ -82,10 +89,13 @@ mongoDBConnect(app)
 //Importando rotas
 import login from './routes/login.mjs'
 import register from './routes/register.mjs'
+import chat from './routes/chat.mjs'
+import passport from 'passport'
 
 //Configurando rotas
 app.use('/', login)
 app.use('/user', register)
+app.use('/user', chat)
 
 //Conectando ao servidor
 server.listen(process.env.PORT, () => {
