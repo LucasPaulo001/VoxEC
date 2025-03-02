@@ -5,7 +5,7 @@
   </div>
   <div class="offcanvas-body">
     <div class="d-flex bottonsTool justify-content-center">
-        <button class="btnAdd">
+        <button onclick="createGroup()" class="btnAdd">
             <span class="material-symbols-outlined add">
                 add
             </span>
@@ -16,7 +16,43 @@
             </span>
         </button>
     </div>
+    <div class="createGroup mt-4" id="createGroup">
+      <form action="/user/createGroup" method="post">
+        <div class="mb-3">
+          <div class="inputContent">
+            <span class="material-symbols-outlined iconForm">
+              groups
+            </span>
+            <input type="tex" placeholder="Nome do grupo" class="form-control" name="groupName" id="groupName">
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="inputContent">
+            <span class="material-symbols-outlined iconForm">
+              description
+            </span>
+            <input type="tex" placeholder="Descrição do grupo" class="form-control" name="groupDescription" id="groupDescription">
+          </div>
+        </div>
+        <div class="btns">
+          <button type="submit" class="btnCreate">Criar</button>
+        </div>
+      </form>
+    </div>
     <hr>
-    <p>Aqui fica os grupos</p>
+    <div class="groups">
+      <h3>Grupos</h3>
+      <hr>
+        <div class="localGroup p-3">
+          <ul class="list-group">
+            {{#each dataGroups}}
+              <li class="list-group-item itemGroup">
+                <h4>{{this.groupName}}</h4>
+                <p>{{this.groupDescription}}</p>
+              </li>
+            {{/each}}
+          </ul>
+        </div>
+    </div>
   </div>
 </div>

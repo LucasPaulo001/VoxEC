@@ -46,7 +46,7 @@ export function passportConfig(passport){
 }
 
 //Função que verifica se o usuário está autenticado
-export function isAuthenticated(req, res, next){
+export default function isAuthenticated(req, res, next){
     if(req.isAuthenticated()){
         return next()
     }

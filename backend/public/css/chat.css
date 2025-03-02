@@ -188,6 +188,47 @@ footer{
   align-items: center;
   justify-content: center;
 }
+.iconForm{
+  color: black;
+}
+.createGroup{
+  height: 0px;
+  overflow: hidden;
+  transition: .4s ease-in-out;
+}
+.createGroup.ativeCreate{
+  height: auto;
+  overflow: visible;
+}
+.btnCreate{
+  color: white;
+  background-color: var(--backgroun01);
+  border: 1px solid white;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  transition: .2s ease-in-out;
+  box-shadow: 4px 4px;
+}
+.btnCreate:hover{
+  background-image: linear-gradient(to right, var(--colorBottons), var(--colorBottons02));
+  color: white;
+  border: 1px solid transparent;
+  box-shadow: 4px 4px 9px 0px white;
+}
+.list-group{
+  gap: 20px !important;
+}
+.itemGroup{
+  cursor: pointer;
+  background-color: #ffffff70 !important;
+  backdrop-filter: blur(1px);
+  color: white !important;
+  transition: .4s;
+}
+.itemGroup:hover{
+  background-color: #2922594b !important;
+}
 @media(max-width: 690px){
     .contentCards{
         align-items: center;
