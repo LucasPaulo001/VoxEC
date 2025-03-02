@@ -23,9 +23,14 @@ dotenv.config()
 io.on("connection", (socket) => {
     console.log("Usuário conectado", socket.id)
 
-    socket.on("message", (data) => {
+    socket.on("sendMessage", (data) => {
         console.log("Mensagem recebida:", data)
-        io.emit("message", data)
+        io.emit("receiveMessage", {
+            groupId: data.groupId,
+            message: data.message,
+            userId: data.userId,
+            username: data.username
+        })
     })
     socket.on("disconnect", () => {
         console.log("Usuário desconectado:", socket.id)

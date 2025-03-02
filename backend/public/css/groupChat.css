@@ -1,0 +1,67 @@
+:root{
+    --colorBottons: #4F30BF;
+    --colorBottons02: #e951fd;
+    --backgroun01: #292259;
+    --backgroundBlur: #29225980;
+}
+
+.localChat{
+    height: 100vh;
+    margin-bottom: 10%;
+}
+.contentMsg{
+    background-color: var(--backgroundBlur);
+    backdrop-filter: blur(2px);
+    border-radius: 15px;
+    margin-bottom: 15px;
+    height: 100%;
+}
+#messageForm{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+.contentMsg{
+    padding: 20px;
+}
+.me {
+    background-image: linear-gradient(45deg, var(--backgroun01), transparent);;
+    color: white;
+    text-align: right;
+    border: 1px solid var(--colorBottons);
+    padding: 10px;
+    border-radius: 10px;
+    margin-left: auto;
+    width: fit-content;
+    max-width: 60%;
+}
+
+.other {
+    background-color: #ddd; /* Cinza para outros */
+    color: black;
+    text-align: left;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: auto;
+    width: fit-content;
+    max-width: 60%;
+}
+.userName {
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.contentChat{
+    overflow-y: scroll;
+    height: 90%;
+    padding: 10px;
+}
+
+#messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

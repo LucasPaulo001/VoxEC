@@ -45,11 +45,20 @@
       <hr>
         <div class="localGroup p-3">
           <ul class="list-group">
+            {{!-- Lista de grupos --}}
             {{#each dataGroups}}
-              <li class="list-group-item itemGroup">
-                <h4>{{this.groupName}}</h4>
-                <p>{{this.groupDescription}}</p>
-              </li>
+              <a class="text-decoration-none" href="/user/group/{{this._id}}">
+                <li class="list-group-item itemGroup">
+                  <div class="dataGroup">
+                    <h4>{{this.groupName}}</h4>
+                      <small>
+                        Criador por: <strong>{{this.author.username}}</strong>
+                      </small>
+                  </div>
+                  <hr>
+                  <p>{{this.groupDescription}}</p>
+                </li>
+              </a>
             {{/each}}
           </ul>
         </div>

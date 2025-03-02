@@ -1,0 +1,60 @@
+<div class="container d-flex justify-content-center p-3 cardHero text-light">
+   <h4>{{groupData.groupName}}</h4>
+</div>
+<hr>
+<div class="localChat">
+    <div class="container contentMsg">
+        <div class="contentChat">
+            <div id="messages"></div>
+        </div>
+
+        <form class="p-3" id="messageForm">
+            <input class="form-control" type="text" id="messageInput" placeholder="Digite sua mensagem..." required>
+            <button class="btn btn-primary" type="submit">Enviar</button>
+        </form>
+    </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+  const groupId = "{{group._id}}"; // Pegando o ID do grupo
+  const userId = "{{user._id}}";  // Pegando o ID do usuário logado
+
+  document.getElementById('messageForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const message = document.getElementById('messageInput').value;
+
+    // Emitindo a mensagem com o nome do usuário
+    socket.emit('sendMessage', { groupId, message, userId, username: "{{user.username}}" });
+    document.getElementById('messageInput').value = '';
+  });
+
+  socket.on('receiveMessage', (data) => {
+    const msgDiv = document.createElement('div');
+    msgDiv.classList.add('msgStyle');
+
+    // Criação da estrutura para mostrar a mensagem com o nome do usuário
+    const userName = document.createElement('strong');
+    userName.textContent = data.username;  // Exibindo o nome do usuário
+    msgDiv.appendChild(userName);
+
+    // Exibindo a mensagem
+    const messageText = document.createElement('span');
+    messageText.textContent = `: ${data.message}`;
+    msgDiv.appendChild(messageText);
+
+    const loggedUserId = "{{user._id}}".toString(); 
+
+    if (data.userId === loggedUserId) {
+        msgDiv.classList.add("me"); 
+        document.getElementById('messages').classList.add('meBloque');
+    } else {
+        msgDiv.classList.add("other"); 
+        document.getElementById('messages').classList.add('otherBloque');
+    }
+
+    document.getElementById('messages').appendChild(msgDiv);
+  });
+</script>
+
