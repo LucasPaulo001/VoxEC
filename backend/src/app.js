@@ -49,7 +49,19 @@ const hbs = create({
     runtimeOptions: {
         allowProtoPropertiesByDefault: true,
         allowProtoMethodsByDefault: true
-    }
+    },
+    helpers: {
+        eq: function (a, b){
+            return a === b
+        },
+        isMember: function (members, userId, options){
+            if (members.includes(userId.toString())) {
+                return options.fn(this); // Renderiza o conteúdo dentro do #if
+            } else {
+                return options.inverse(this); // Renderiza o conteúdo dentro do #else
+            }
+        }
+    },
 })
 
 //Configuração a engine

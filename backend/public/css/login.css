@@ -55,6 +55,10 @@ body{
     backdrop-filter: blur(1px);
     border-radius: 10px 0 0 10px;
     border: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 .title{
     text-align: center;
@@ -73,6 +77,29 @@ input{
 .inputContent:hover .iconForm{
     color: var(--colorBottons);
     transition: .4s ease-in;
+}
+
+#logo{
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#logo img{
+    height: 50%;
+    border-radius: 20px;
+    animation: logoAnimated 1s ease-in-out infinite;
+}
+@keyframes logoAnimated {
+    0%{
+        box-shadow: 1px 1px 3px;
+    }
+    50%{
+        box-shadow: 1px 1px 12px;
+    }
+    0%{
+        box-shadow: 1px 1px 3px;
+    }
 }
 
 @media(max-width: 640px){

@@ -225,6 +225,7 @@ footer{
   backdrop-filter: blur(1px);
   color: white !important;
   transition: .4s;
+  border-radius: 15px !important;
 }
 .itemGroup:hover{
   background-color: #2922594b !important;

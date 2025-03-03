@@ -17,6 +17,10 @@
         </button>
     </div>
     <div class="createGroup mt-4" id="createGroup">
+      <hr>
+      <div class="mb-3">
+        <h4>Criar novo grupo</h4>
+      </div>
       <form action="/user/createGroup" method="post">
         <div class="mb-3">
           <div class="inputContent">
@@ -32,6 +36,17 @@
               description
             </span>
             <input type="tex" placeholder="Descrição do grupo" class="form-control" name="groupDescription" id="groupDescription">
+          </div>
+        </div>
+        <div class="mb-3">
+          <div class="inputContent">
+            <select class="form-select" name="privacity" aria-label="Default select example">
+              <option selected>
+                Privacidade do Grupo
+              </option>
+              <option value="public">Público</option>
+              <option value="private">Privado</option>
+            </select>
           </div>
         </div>
         <div class="btns">
@@ -54,11 +69,34 @@
                       <small>
                         Criador por: <strong>{{this.author.username}}</strong>
                       </small>
+                      {{#if (eq this.privacity "private")}}
+                        <span class="material-symbols-outlined lock">
+                          lock
+                        </span>
+                      {{else if (eq this.privacity "public")}}
+                        <span class="material-symbols-outlined open">
+                          lock_open
+                        </span>
+                      {{/if}}
                   </div>
                   <hr>
-                  <p>{{this.groupDescription}}</p>
+                  <p>
+                    {{#if (eq this.privacity "private")}}
+                      <div class="cardHero p-3">
+                        {{#isMember this.members ../user._id}}
+                            <span class="text-success">Você faz parte deste grupo</span>
+                        {{else}}
+                            <span class="text-danger">Você não faz parte deste grupo</span>
+                        {{/isMember}}
+                      </div>
+                    {{/if}}
+                  </p>
                 </li>
               </a>
+            {{else}}
+              <div class="d-flex justify-content-center text-light">
+                <h4>Nenhum grupo por aqui...</h4>
+              </div>
             {{/each}}
           </ul>
         </div>

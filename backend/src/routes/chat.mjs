@@ -18,11 +18,13 @@ chat.get('/chat', isAuthenticated, (req, res) =>{
 
 //Rota para criação de grupos
 chat.post('/createGroup', (req, res) => {
-    const { groupName, groupDescription } = req.body
+    const { groupName, groupDescription, privacity, } = req.body
     const newGroup = new Group({
         groupName,
         groupDescription,
-        author: req.user._id
+        privacity,
+        author: req.user._id,
+        members: [req.user._id]
     })
     newGroup.save()
     .then(() => {
@@ -37,11 +39,26 @@ chat.post('/createGroup', (req, res) => {
 })
 
 //Rota para chat do grupo
-chat.get('/group/:id', (req, res) => {
+chat.get('/group/:id', isAuthenticated, (req, res) => {
     const { id } = req.params
     Group.findById(id)
+    .populate('members')
     .then((groupData) => {
+        if(!groupData){
+            req.flash('error_msg', 'Grupo não encontrado!')
+            return res.redirect('/user/chat')
+        }
+
+        if(groupData.privacity === 'private' && !groupData.members.some(member => member._id.toString() === req.user._id.toString())){
+            req.flash('error_msg', 'Este grupo é privado e você não faz parte dele!')
+            return res.redirect('/user/chat')
+        }
         res.render('pages/group', {groupData})
+    })
+    .catch((error) => {
+        console.log('[debug]: ', error)
+        req.flash('error_msg', 'Erro ao encotrar grupo.')
+        res.redirect('/user/chat')
     })
 })
 
