@@ -153,6 +153,9 @@
 .dropdown-menu{
     width: 20vw !important;
 }
+.btnToolData{
+    display: flex;
+}
 
 @media(max-width: 680px){
     .localChat {
@@ -160,5 +163,8 @@
     }
     .members{
         font-size: 7vw !important;
+    }
+    #localToolGroup{
+        flex-direction: column;
     }
 }
