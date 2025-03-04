@@ -70,44 +70,33 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  const socket = io({query: {userId: "{{user._id}}"} })
-    socket.on("userStatusChange", ({ userId, isOnline }) => {
-    const userElement = document.querySelector(`[data-user-id="${userId}"]`)
-      if (userElement) {
-        userElement.innerHTML = isOnline ? '🟢' : '🔴'
-      }
-  });
-  //const socket = io();
-  const groupId = "{{group._id}}"; 
-  const userId = "{{user._id}}"; 
+  const socket = io({ query: { userId: "{{user._id}}" } })
+
+  const groupId = "{{group._id}}" 
+  const userId = "{{user._id}}" 
 
   document.getElementById('messageForm').addEventListener('submit', (event) => {
-    event.preventDefault();
-    const message = document.getElementById('messageInput').value;
-
-    // Emitindo a mensagem com o nome do usuário
-    socket.emit('sendMessage', { groupId, message, userId, username: "{{user.username}}" });
-    document.getElementById('messageInput').value = '';
-  });
+    event.preventDefault()
+    const message = document.getElementById('messageInput').value
+    socket.emit('sendMessage', { groupId, message, userId, username: "{{user.username}}" })
+    document.getElementById('messageInput').value = ''
+  })
 
   socket.on('receiveMessage', (data) => {
     const msgDiv = document.createElement('div')
     msgDiv.classList.add('msgStyle')
 
-    // Criação da estrutura para mostrar a mensagem com o nome do usuário
     const userName = document.createElement('strong')
-    userName.textContent = data.username;  // Exibindo o nome do usuário
+    userName.textContent = data.username
     msgDiv.appendChild(userName)
 
-    // Exibindo a mensagem
     const messageText = document.createElement('span')
     messageText.textContent = `: ${data.message}`
-    msgDiv.appendChild(messageText);
+    msgDiv.appendChild(messageText)
 
-    const loggedUserId = "{{user._id}}".toString() 
-
+    const loggedUserId = "{{user._id}}".toString()
     if (data.userId === loggedUserId) {
-        msgDiv.classList.add("me") 
+        msgDiv.classList.add("me")
         document.getElementById('messages').classList.add('meBloque')
     } else {
         msgDiv.classList.add("other")

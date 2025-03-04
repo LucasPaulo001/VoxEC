@@ -20,6 +20,9 @@ dotenv.config()
     })
 
 //Conexão ao socket.io
+
+app.set('socketio', io)
+
 const onlineUsers = new Map()
 io.on("connection", (socket) => {
     const userId = socket.handshake.query.userId

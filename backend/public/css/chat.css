@@ -264,7 +264,61 @@ footer{
   height: 25vh;
   align-items: center;
 }
+.avatarHeight{
+  height: 90px;
+}
+.avatarNone{
+  height: 80px;
+  border-radius: 50px;
+  border: 1px solid white;
+}
+.localUser{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+.localFriends{
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  height: 80vh;
+}
+.btnAddF{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.localSolicitation{
+    padding: 10px;
+    flex-direction: column;
+    gap: 15px;
+}
+.dataSolicitation{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+.animationInfo{
+  animation: animeInfo 2s infinite ease-in-out;
+  border: 1px solid white !important;
+}
+@keyframes animeInfo {
+  0%{
+    box-shadow: 0px 0px red;
+  }
+  50%{
+    box-shadow: 0px 0px 19px 5px red; 
+  } 
+  100%{
+    box-shadow: 0px 0px red;
+  }
+}
 @media(max-width: 690px){
+    .localFriends{
+      height: 60vh;
+    }
     .contentCards{
         align-items: center;
         flex-direction: column;

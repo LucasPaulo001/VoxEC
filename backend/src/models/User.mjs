@@ -9,7 +9,8 @@ const UserSchema = new Schema({
     emailVerificado: { type: Boolean, default: false },
     tokenVerificado: { type: String },
     friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-    avatar: {type: String, default: ""}
+    avatar: {type: String, default: ""},
+    friendRequests: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
 })
 
 export default mongoose.model('User', UserSchema)

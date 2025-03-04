@@ -1,6 +1,33 @@
 <div class="container mt-4 cardHero p-4">
-    <h5>Bem vido ao VoxEC, {{dataUser.username}}!</h5>
-    <p>Crie grupos e conecte-se!</p>
+    <div>
+      <h5>Bem vido ao VoxEC, {{dataUser.username}}!</h5>
+      <p>Crie grupos e conecte-se!</p>
+    </div>
+    {{#if user.friendRequests.length}}
+      <div>
+        <button type="button" class="btn animationInfo btn-danger d-flex" id="liveToastBtn">
+          <span class="material-symbols-outlined">
+            info
+          </span>
+        </button>
+
+        <div class="toast-container position-fixed bottom-0 end-0 p-3">
+          <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+              <img src="/assets/images/VoxEC.png" height="40px" class="rounded me-2" alt="...">
+              <strong class="me-auto">Notificação</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            {{#each user.friendRequests}}
+            <div class="toast-body text-dark">
+              Você tem nova(s) solicitações de amizade <br>
+              <strong>{{this.username}}</strong>
+            </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    {{/if}}
 </div>
 <button class="cta btn btn-primary mt-4" type="button" id="open-msg" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">
   <span class="span">Entrar no Chat</span>
@@ -86,3 +113,15 @@
 <footer>
     &copy; 2025 VoxEC
 </footer>
+
+<script>
+  const toastTrigger = document.getElementById('liveToastBtn')
+  const toastLiveExample = document.getElementById('liveToast')
+
+if (toastTrigger) {
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  toastTrigger.addEventListener('click', () => {
+    toastBootstrap.show()
+  })
+}
+</script>

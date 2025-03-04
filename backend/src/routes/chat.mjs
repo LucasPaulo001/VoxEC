@@ -11,11 +11,16 @@ chat.get('/chat', isAuthenticated, (req, res) =>{
     .populate('author', 'username')
     .then((dataGroups) => {
         User.findById(req.user._id)
+        .populate('friendRequests', 'username email avatar')
         .then((user) => {
-            res.render('pages/chat', {
-                dataUser,
-                dataGroups,
-                user
+            User.find()
+            .then((users) => {
+                res.render('pages/chat', {
+                    dataUser,
+                    dataGroups,
+                    user,
+                    users
+                })
             })
         })
     })
@@ -65,6 +70,74 @@ chat.get('/group/:id', isAuthenticated, (req, res) => {
         req.flash('error_msg', 'Erro ao encotrar grupo.')
         res.redirect('/user/chat')
     })
+})
+
+//Rota para envio de solicitação de amizade
+chat.post('/addFriend/:idUser', isAuthenticated, (req, res) => {
+    const { idUser } = req.params
+    const myId = req.user._id
+
+    User.findByIdAndUpdate(idUser, {
+        $addToSet: {friendRequests: myId}
+    }, { new: true })
+    .then(() => {
+
+        const io = req.app.get('socketio')
+        io.to(idUser.toString()).emit('friendRequest', { from: myId })
+
+        req.flash('success_msg', 'Solicitação de amizade enviada com sucesso!')
+        return res.redirect(req.headers.referer)
+    })
+    .catch((error) => {
+        console.log('[debug]: Erro: ', error)
+        req.flash('error_msg', 'Erro ao enviar solicitação de amizade')
+        return res.redirect(req.headers.referer)
+    })
+})
+
+//Rota para aceitar a amizade
+chat.post('/acceptFriend/:idUser', isAuthenticated, (req, res) => {
+    const { idUser } = req.params
+    const myId = req.user._id
+
+    User.findByIdAndUpdate(myId, {
+        $pull: {friendRequests: idUser},
+        $addToSet: {friends: idUser}
+    } , {new: true})
+    .then(() => {
+        return User.findByIdAndUpdate(idUser, {
+            $addToSet: {friends: myId}
+        }, { new: true })
+    })
+    .then(() => {
+        req.flash('success_msg', 'Agora vocês são amigos!')
+        return res.redirect(req.headers.referer)
+    })
+    .catch((error) => {
+        console.log('[debug]: Erro, ', error)
+        req.flash('error_msg', 'Erro ao tentar aceitar solicitação!')
+        return res.redirect(req.headers.referer)
+    })
+})
+
+//Rota para recusar amizade
+chat.post('/rejectFriend/:idUser', isAuthenticated, (req, res) => {
+    const { idUser } = req.params
+    const myId = req.user._id
+
+    User.findByIdAndUpdate(myId, {
+        $pull: { friendRequests: idUser }
+    })
+    .then(() => {
+        req.flash('success_msg', 'Solicitação recusada')
+        res.redirect(req.headers.referer)
+    })
+    .catch((error) => {
+        req.flash('error_msg', 'Erro ao recusar solicitação!')
+        res.redirect(req.headers.referer)
+        console.log('[debug]: Error, ', error)
+    })
+
 })
 
 

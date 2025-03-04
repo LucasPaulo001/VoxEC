@@ -35,6 +35,10 @@
     {{!-- Scripts Locais --}}
     <script src="/js/code.js"></script>
     <script src="/js/selectAvatar.js"></script>
-    {{!-- <script src="/js/visibilityUser.js"></script> --}}
+    <script>
+    const userIdFromServer = "{{user._id}}"; 
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/socketNotifications.js"></script>
 </body>
 </html>
