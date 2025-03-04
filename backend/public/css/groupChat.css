@@ -123,14 +123,56 @@
 }
 .inputAdd{
     display: flex;
-    align-items: center;
-    gap: 5px;
-    width: 0;
     overflow: hidden;
+    justify-content: center;
+    height: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: #0000003b;
+    backdrop-filter: blur(1px);
 }
 .inputAdd.ativeForm{
-    width: auto;
+    display: flex;
     overflow: visible;
+    justify-content: center;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 99;
+    background-color: #0000003b;
+    backdrop-filter: blur(1px);
+    align-items: center;
+}
+.localdFriends{
+    width: 50%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 20px;
+    flex-direction: column;
+    position: relative;
+}
+.closeWindow{
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    color: red;
+    cursor: pointer;
+}
+.localDataFriend{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    padding: 5px;
+    justify-content: center;
 }
 .iconFormAdd{
     position: absolute;
@@ -158,6 +200,16 @@
 }
 
 @media(max-width: 680px){
+    .dropdown-menu{
+        flex-direction: column;
+        align-items: center;
+    }
+    .dropdown-menu.show{
+        display: flex !important;
+    }
+    .localdFriends{
+        width: 95%;
+    }
     .localChat {
         height: 80vh;
     }

@@ -20,7 +20,12 @@
     }
 })
 
+const form = document.getElementById('form')
 function openFormAdd(){
-    const form = document.getElementById('form')
-    form.classList.toggle('ativeForm')
+    form.classList.add('ativeForm')
 }
+form.addEventListener('click', (event) => {
+    if(event.target.id === 'form' || event.target.id === 'closeWindow'){
+        form.classList.remove('ativeForm')
+    }
+})

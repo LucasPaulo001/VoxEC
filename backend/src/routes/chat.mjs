@@ -54,16 +54,29 @@ chat.get('/group/:id', isAuthenticated, (req, res) => {
     Group.findById(id)
     .populate('members', 'username')
     .then((groupData) => {
-        if(!groupData){
-            req.flash('error_msg', 'Grupo não encontrado!')
-            return res.redirect('/user/chat')
-        }
+        User.findById(req.user._id)
+        .populate('friends', 'avatar username')
+        .then((user) => {
+            if(!groupData){
+                req.flash('error_msg', 'Grupo não encontrado!')
+                return res.redirect('/user/chat')
+            }
+    
+            if(groupData.privacity === 'private' && !groupData.members.some(member => member._id.toString() === req.user._id.toString())){
+                req.flash('error_msg', 'Este grupo é privado e você não faz parte dele!')
+                return res.redirect('/user/chat')
+            }
 
-        if(groupData.privacity === 'private' && !groupData.members.some(member => member._id.toString() === req.user._id.toString())){
-            req.flash('error_msg', 'Este grupo é privado e você não faz parte dele!')
-            return res.redirect('/user/chat')
-        }
-        res.render('pages/group', {groupData})
+            // Filtra os amigos que ainda não estão no grupo
+            const friendsNotInGroup = user.friends.filter(friend => 
+                !groupData.members.some(member => member._id.equals(friend._id))
+            )
+            res.render('pages/group', {
+                groupData,
+                user,
+                friendsNotInGroup
+            })
+        })
     })
     .catch((error) => {
         console.log('[debug]: ', error)
@@ -137,7 +150,25 @@ chat.post('/rejectFriend/:idUser', isAuthenticated, (req, res) => {
         res.redirect(req.headers.referer)
         console.log('[debug]: Error, ', error)
     })
+})
 
+//Rota para adicionar membro a um grupo
+chat.post('/addMember/:userId', isAuthenticated, (req, res) => {
+    const { userId } = req.params
+    const { idGroup } = req.body
+
+    Group.findByIdAndUpdate(idGroup, {
+        $addToSet: { members: userId }
+    }, { new: true })
+    .then(() => {
+        req.flash('success_msg', 'Membro adicionado com sucesso!')
+        return res.redirect(req.headers.referer)
+    })
+    .catch((error) => {
+        console.log('[debug]: Erro, ', error)
+        req.flash('error_msg', 'Erro ao tentar adicionar membro!')
+        return res.redirect(req.headers.referer)
+    })
 })
 
 

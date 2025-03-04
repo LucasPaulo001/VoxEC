@@ -41,12 +41,33 @@
     </div>
   </div>
   <div class="inputAdd inputContent" id="form">
-    <span class="material-symbols-outlined iconFormAdd">
-      identity_platform
-    </span>
-    <input type="text" placeholder="Busque por username" class="form-control">
-    <div class="btns">
-      <button class="btnAction">Add</button>
+    <div class="localdFriends">
+      <span class="material-symbols-outlined closeWindow" id="closeWindow">
+        close
+      </span>
+      <div class="d-flex mb-3 justify-content-center"> 
+        <h5>Adicione amigo(a) ao grupo: </h5>
+      </div>
+      {{#each friendsNotInGroup}}
+        <div class="localDataFriend">
+          <div>
+            <img src="{{this.avatar}}" height="50px" alt="">
+          </div>
+          <div>
+            {{this.username}}
+          </div>
+          <form action="/user/addMember/{{this._id}}" method="post">
+          <input type="hidden" value="{{../groupData._id}}" name="idGroup">
+            <div class="btns">
+              <button type="submit" class="btnAction">Add</button>
+            </div>
+          </form>
+        </div>
+      {{else}}
+        <div class="d-flex justify-content-center">
+          <span class="text-danger">Todos os seus amigos já fazem parte deste grupo!</span>
+        </div>
+      {{/each}}
     </div>
   </div>
 </div>
@@ -71,6 +92,13 @@
 <script src="/socket.io/socket.io.js"></script>
 <script>
   const socket = io({ query: { userId: "{{user._id}}" } })
+  // Atualiza status online/offline
+  socket.on("userStatusChange", ({ userId, isOnline }) => {
+      const userElement = document.querySelector(`[data-user-id="${userId}"]`)
+      if (userElement) {
+          userElement.innerHTML = isOnline ? '🟢' : '🔴'
+      }
+  })
 
   const groupId = "{{group._id}}" 
   const userId = "{{user._id}}" 
