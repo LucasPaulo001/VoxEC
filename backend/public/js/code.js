@@ -29,3 +29,13 @@ form.addEventListener('click', (event) => {
         form.classList.remove('ativeForm')
     }
 })
+
+const admin = document.getElementById('windowAdm')
+function openAdmins(){
+    admin.classList.add('openInfoAdm')
+}
+admin.addEventListener('click', (event) => {
+    if(event.target.id === 'windowAdm' || event.target.id === 'closeAdminInfo'){
+        admin.classList.remove('openInfoAdm')
+    }
+})

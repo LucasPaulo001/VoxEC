@@ -32,14 +32,22 @@
         {{/each}}
       </ul>
     </div>
-    <div class="iconMembers" type="button">
-      <button class="btnTool" onclick="openFormAdd()">
+    <div class="iconMembers">
+      <button type="button" class="btnTool" onclick="openFormAdd()">
         <span class="material-symbols-outlined p-3 text-light members">
           person_add
         </span>
       </button>
     </div>
+    <div class="iconMembers">
+      <button class="btnTool" onclick="openAdmins()">
+        <span class="material-symbols-outlined p-3 text-light members">
+          shield_person
+        </span>
+      </button>
+    </div>
   </div>
+  {{!-- Janela de adição de membros --}}
   <div class="inputAdd inputContent" id="form">
     <div class="localdFriends">
       <span class="material-symbols-outlined closeWindow" id="closeWindow">
@@ -54,7 +62,7 @@
             <img src="{{this.avatar}}" height="50px" alt="">
           </div>
           <div>
-            {{this.username}}
+              {{this.username}}
           </div>
           <form action="/user/addMember/{{this._id}}" method="post">
           <input type="hidden" value="{{../groupData._id}}" name="idGroup">
@@ -70,6 +78,30 @@
       {{/each}}
     </div>
   </div>
+
+  {{!-- Janela de admins --}}
+    <div class="windowAdm" id="windowAdm">
+      <div class="window">
+        <span class="material-symbols-outlined closeWindow" id="closeAdminInfo">
+          close
+        </span>
+        <div class="localDataAdmins">
+          <div class="d-flex align-items-center justify-content-center">
+            <h4>Admin(s)</h4>
+            <span class="material-symbols-outlined p-3 text-danger members">
+              shield_person
+            </span>
+          </div>
+          <div class="dataAdmin"> 
+            {{#if groupData.admin}}
+              {{#each groupData.admin}}
+                <img src="{{this.avatar}}" alt="" height="100px"> <h4>{{this.username}}</h4>
+              {{/each}}
+            {{/if}}
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 
 <div class="localChat">

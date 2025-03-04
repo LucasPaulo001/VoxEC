@@ -7,7 +7,7 @@ import User from "../models/User.mjs"
 //Rota para página inicial da aplicação
 chat.get('/chat', isAuthenticated, (req, res) =>{
     const dataUser = req.user
-    Group.find()
+    Group.find({members: req.user._id})
     .populate('author', 'username')
     .then((dataGroups) => {
         User.findById(req.user._id)
@@ -28,13 +28,14 @@ chat.get('/chat', isAuthenticated, (req, res) =>{
 
 //Rota para criação de grupos
 chat.post('/createGroup', (req, res) => {
-    const { groupName, groupDescription, privacity, } = req.body
+    const { groupName, groupDescription, privacity } = req.body
     const newGroup = new Group({
         groupName,
         groupDescription,
         privacity,
         author: req.user._id,
-        members: [req.user._id]
+        members: [req.user._id],
+        admin: [req.user._id]
     })
     newGroup.save()
     .then(() => {
@@ -52,7 +53,8 @@ chat.post('/createGroup', (req, res) => {
 chat.get('/group/:id', isAuthenticated, (req, res) => {
     const { id } = req.params
     Group.findById(id)
-    .populate('members', 'username')
+    .populate('members', 'username _id')
+    .populate('admin', 'username _id avatar')
     .then((groupData) => {
         User.findById(req.user._id)
         .populate('friends', 'avatar username')

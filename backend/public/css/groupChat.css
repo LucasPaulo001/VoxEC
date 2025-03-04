@@ -199,6 +199,46 @@
     display: flex;
 }
 
+.windowAdm{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.window{
+    height: 50%;
+    width: 50%;
+    border-radius: 20px;
+    background-color: white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+}
+.windowAdm.openInfoAdm{
+    height: 100vh;
+    overflow: visible;
+    z-index: 999;
+}
+.localDataAdmins{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+.dataAdmin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
 @media(max-width: 680px){
     .dropdown-menu{
         flex-direction: column;
@@ -207,7 +247,7 @@
     .dropdown-menu.show{
         display: flex !important;
     }
-    .localdFriends{
+    .localdFriends, .window{
         width: 95%;
     }
     .localChat {
