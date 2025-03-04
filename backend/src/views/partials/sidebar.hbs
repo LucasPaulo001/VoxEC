@@ -1,21 +1,111 @@
-<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+  id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
   <div class="offcanvas-header">
     <h5 class="offcanvas-title" id="offcanvasScrollingLabel">VoxEC</h5>
     <button type="button" class="btn-close bg-light" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body">
-    <div class="d-flex bottonsTool justify-content-center">
-        <button onclick="createGroup()" class="btnAdd">
-            <span class="material-symbols-outlined add">
-                add
-            </span>
-        </button>
-        <button class="btnAdd">
-            <span class="material-symbols-outlined">
-                settings
-            </span>
-        </button>
+    <div class="d-flex bottonsTool justify-content-center" id="btns">
+      <button class="btnAdd">
+        <span class="material-symbols-outlined add" id="btnAdd">
+          add
+        </span>
+      </button>
+      <button class="btnAdd">
+        <span class="material-symbols-outlined" id="btnSettings">
+          settings
+        </span>
+      </button>
+      <button class="btnAdd">
+        <span class="material-symbols-outlined" id="btnAccount">
+          account_circle
+        </span>
+      </button>
     </div>
+
+    {{!-- Configurações --}}
+    <div class="settings" id="settings">
+      <hr>
+      <div class="mb-3">
+        <h4>Configurações</h4>
+      </div>
+      <div class="cardSettings p-3 mt-4">
+        {{!-- Dados básicos (nome e avatar) --}}
+        <div>
+          {{!-- <div class="mb-3">
+            <h5>Dados básicos</h5>
+          </div>
+          <div class="mb-3">
+            <label for="username">Nome de usuário:</label>
+            <input type="text" class="form-control" value="{{dataUser.username}}">
+            <div class="btns">
+              <button class="btnAction">Alterar</button>
+            </div>
+          </div> --}}
+          <div class="mb-3">
+            <div class="mb-3">
+              <h5>Escolha seu avatar</h5>
+              <div class="avatarContainer mb-3">
+                <img src="https://res.cloudinary.com/dzx23baef/image/upload/v1741043285/avatar01_egj2me.png"
+                  alt="Avatar 1" class="avatar" onclick="selectAvatar(this.src)">
+
+                <img src="https://res.cloudinary.com/dzx23baef/image/upload/v1741043285/avatar05_vrhlut.png"
+                  alt="Avatar 2" class="avatar" onclick="selectAvatar(this.src)">
+
+                <img src="https://res.cloudinary.com/dzx23baef/image/upload/v1741043285/avatar03_vnujho.png"
+                  alt="Avatar 3" class="avatar" onclick="selectAvatar(this.src)">
+
+                <img src="https://res.cloudinary.com/dzx23baef/image/upload/v1741043285/avatar06_gkyqqw.png"
+                  alt="Avatar 3" class="avatar" onclick="selectAvatar(this.src)">
+
+                <img src="https://res.cloudinary.com/dzx23baef/image/upload/v1741043285/avatar02_izb545.png"
+                  alt="Avatar 3" class="avatar" onclick="selectAvatar(this.src)">
+
+                <img src="https://res.cloudinary.com/dzx23baef/image/upload/v1741043285/avatar04_xfq5xk.png"
+                  alt="Avatar 3" class="avatar" onclick="selectAvatar(this.src)">
+              </div>
+              <div class="btns">
+                <button class="btnAction" onclick="saveAvatar()">Salvar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{!-- <hr> --}}
+
+        {{!-- Segurança (senha) --}}
+        {{!--<div>
+           <div class="mb-3">
+            <h5>Segurança</h5>
+          </div>
+
+          <div class="mb-3">
+            <label for="password">Alterar Senha:</label>
+            <input type="text" class="form-control" placeholder="Digite aqui a nova senha!">
+          </div>
+
+          <div class="mb-3"> --}}
+            {{!--<label for="password">Digite novamente:</label>
+            <input type="text" class="form-control" placeholder="Digite novamente a senha!">
+             <div class="btns">
+              <button class="btnAction">Alterar</button>
+            </div> 
+          </div>
+        </div>--}}
+      </div>
+    </div>
+
+    {{!-- Página do perfil de usuário --}}
+    <div class="account mt-4" id="account">
+      <div class="d-flex justify-content-center">
+        <h4>Seu Avatar</h4>
+      </div>
+      <hr>
+      <span class="d-flex justify-content-center"><strong>{{user.username}}</strong></span>
+      <div class="d-flex perfilAvatar justify-content-center">
+        <img id="avatarImg" src="{{user.avatar}}" alt="" height="100%">
+      </div>
+    </div>
+
     <div class="createGroup mt-4" id="createGroup">
       <hr>
       <div class="mb-3">
@@ -35,7 +125,8 @@
             <span class="material-symbols-outlined iconForm">
               description
             </span>
-            <input type="tex" placeholder="Descrição do grupo" class="form-control" name="groupDescription" id="groupDescription">
+            <input type="tex" placeholder="Descrição do grupo" class="form-control" name="groupDescription"
+              id="groupDescription">
           </div>
         </div>
         <div class="mb-3">
@@ -58,48 +149,48 @@
     <div class="groups">
       <h3>Grupos</h3>
       <hr>
-        <div class="localGroup p-3">
-          <ul class="list-group">
-            {{!-- Lista de grupos --}}
-            {{#each dataGroups}}
-              <a class="text-decoration-none" href="/user/group/{{this._id}}">
-                <li class="list-group-item itemGroup">
-                  <div class="dataGroup">
-                    <h4>{{this.groupName}}</h4>
-                      <small>
-                        Criador por: <strong>{{this.author.username}}</strong>
-                      </small>
-                      {{#if (eq this.privacity "private")}}
-                        <span class="material-symbols-outlined lock">
-                          lock
-                        </span>
-                      {{else if (eq this.privacity "public")}}
-                        <span class="material-symbols-outlined open">
-                          lock_open
-                        </span>
-                      {{/if}}
-                  </div>
-                  <hr>
-                  <p>
-                    {{#if (eq this.privacity "private")}}
-                      <div class="cardHero p-3">
-                        {{#isMember this.members ../user._id}}
-                            <span class="text-success">Você faz parte deste grupo</span>
-                        {{else}}
-                            <span class="text-danger">Você não faz parte deste grupo</span>
-                        {{/isMember}}
-                      </div>
-                    {{/if}}
-                  </p>
-                </li>
-              </a>
-            {{else}}
-              <div class="d-flex justify-content-center text-light">
-                <h4>Nenhum grupo por aqui...</h4>
+      <div class="localGroup p-3">
+        <ul class="list-group">
+          {{!-- Lista de grupos --}}
+          {{#each dataGroups}}
+          <a class="text-decoration-none" href="/user/group/{{this._id}}">
+            <li class="list-group-item itemGroup">
+              <div class="dataGroup">
+                <h4>{{this.groupName}}</h4>
+                <small>
+                  Criador por: <strong>{{this.author.username}}</strong>
+                </small>
+                {{#if (eq this.privacity "private")}}
+                <span class="material-symbols-outlined lock">
+                  lock
+                </span>
+                {{else if (eq this.privacity "public")}}
+                <span class="material-symbols-outlined open">
+                  lock_open
+                </span>
+                {{/if}}
               </div>
-            {{/each}}
-          </ul>
-        </div>
+              <hr>
+              <p>
+                {{#if (eq this.privacity "private")}}
+              <div class="cardHero p-3">
+                {{#isMember this.members ../user._id}}
+                <span class="text-success">Você faz parte deste grupo</span>
+                {{else}}
+                <span class="text-danger">Você não faz parte deste grupo</span>
+                {{/isMember}}
+              </div>
+              {{/if}}
+              </p>
+            </li>
+          </a>
+          {{else}}
+          <div class="d-flex justify-content-center text-light">
+            <h4>Nenhum grupo por aqui...</h4>
+          </div>
+          {{/each}}
+        </ul>
+      </div>
     </div>
   </div>
 </div>

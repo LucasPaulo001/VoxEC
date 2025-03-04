@@ -118,10 +118,47 @@
 #localToolGroup{
     display: flex;
     justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.inputAdd{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: 0;
+    overflow: hidden;
+}
+.inputAdd.ativeForm{
+    width: auto;
+    overflow: visible;
+}
+.iconFormAdd{
+    position: absolute;
+    bottom: 20px;
+    padding-left: 5px;
+    color: black
+}
+.inputAdd:hover .iconFormAdd{
+    color: var(--colorBottons);
+    transition: .4s ease-in-out;
+}
+.listMember{
+    display: flex !important;
+    gap: 10px;
+}
+.btnTool{
+    background: transparent;
+    border: 1px solid transparent;
+}
+.dropdown-menu{
+    width: 20vw !important;
 }
 
 @media(max-width: 680px){
     .localChat {
         height: 80vh;
+    }
+    .members{
+        font-size: 7vw !important;
     }
 }

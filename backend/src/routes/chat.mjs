@@ -2,6 +2,7 @@ import { Router } from "express"
 import Group from "../models/Group.mjs"
 const chat = Router()
 import isAuthenticated from "../configs/auth.mjs"
+import User from "../models/User.mjs"
 
 //Rota para página inicial da aplicação
 chat.get('/chat', isAuthenticated, (req, res) =>{
@@ -9,9 +10,13 @@ chat.get('/chat', isAuthenticated, (req, res) =>{
     Group.find()
     .populate('author', 'username')
     .then((dataGroups) => {
-        res.render('pages/chat', {
-            dataUser,
-            dataGroups
+        User.findById(req.user._id)
+        .then((user) => {
+            res.render('pages/chat', {
+                dataUser,
+                dataGroups,
+                user
+            })
         })
     })
 })
@@ -42,7 +47,7 @@ chat.post('/createGroup', (req, res) => {
 chat.get('/group/:id', isAuthenticated, (req, res) => {
     const { id } = req.params
     Group.findById(id)
-    .populate('members')
+    .populate('members', 'username')
     .then((groupData) => {
         if(!groupData){
             req.flash('error_msg', 'Grupo não encontrado!')

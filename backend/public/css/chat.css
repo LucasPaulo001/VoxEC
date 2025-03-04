@@ -191,15 +191,21 @@ footer{
 .iconForm{
   color: black;
 }
-.createGroup{
+.createGroup, .account, .settings{
   height: 0px;
   overflow: hidden;
-  transition: .4s ease-in-out;
 }
-.createGroup.ativeCreate{
+.createGroup.ativeCreate, .settings.ativeSettings, .account.ativeAccount{
   height: auto;
   overflow: visible;
 }
+
+.cardSettings{
+  background-color: white;
+  color: black;
+  border-radius: 15px;
+}
+
 .btnCreate{
   color: white;
   background-color: var(--backgroun01);
@@ -233,6 +239,29 @@ footer{
 .dataGroup{
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.avatarContainer{
+  gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.avatar.avatarSelected{
+  border: 3px solid var(--colorBottons);
+}
+.avatarContainer img{
+  height: 100px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.avatarContainer img:hover{
+  border: 1px solid var(--backgroun01);
+}
+.perfilAvatar{
+  height: 25vh;
   align-items: center;
 }
 @media(max-width: 690px){

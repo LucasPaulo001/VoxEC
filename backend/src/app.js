@@ -20,8 +20,16 @@ dotenv.config()
     })
 
 //Conexão ao socket.io
+const onlineUsers = new Map()
 io.on("connection", (socket) => {
-    console.log("Usuário conectado", socket.id)
+    const userId = socket.handshake.query.userId
+
+    if(userId){
+        onlineUsers.set(userId, socket.id)
+        io.emit("userStatusChange", { userId, isOnline: true })
+
+        console.log(`Usuário ${userId} conectado:`, socket.id)
+    }
 
     socket.on("sendMessage", (data) => {
         console.log("Mensagem recebida:", data)
@@ -33,7 +41,11 @@ io.on("connection", (socket) => {
         })
     })
     socket.on("disconnect", () => {
-        console.log("Usuário desconectado:", socket.id)
+        if(userId){
+            onlineUsers.delete(userId)
+            io.emit("userStatusChange", { userId, isOnline: false })
+            console.log(`Usuário ${userId} desconectado:`, socket.id);
+        }
     })
 })
 
@@ -108,11 +120,13 @@ import login from './routes/login.mjs'
 import register from './routes/register.mjs'
 import chat from './routes/chat.mjs'
 import passport from 'passport'
+import avatarRoute from './routes/avatar.mjs'
 
 //Configurando rotas
 app.use('/', login)
 app.use('/user', register)
 app.use('/user', chat)
+app.use('/user', avatarRoute)
 
 //Conectando ao servidor
 server.listen(process.env.PORT, () => {

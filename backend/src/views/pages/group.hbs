@@ -6,27 +6,58 @@
 <div id="localToolGroup">
   <div class="dropdown">
     <div class="iconMembers" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-    <span class="material-symbols-outlined p-3 text-light members">
-      groups
-    </span>
+    <button class="btnTool">
+      <span class="material-symbols-outlined p-3 text-light members">
+        groups
+      </span>
+    </button>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io({query: {userId: "{{user._id}}"} })
+    socket.on("userStatusChange", ({ userId, isOnline }) => {
+    const userElement = document.querySelector(`[data-user-id="${userId}"]`);
+      if (userElement) {
+        userElement.innerHTML = isOnline ? '🟢' : '🔴'; 
+      }
+    });
+  </script>
   </div>
     <ul class="dropdown-menu">
-      <li>
-        <a class="dropdown-item" href="#">Action</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="#">Another action</a>
-      </li>
-      <li>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </li>
+      <div class="d-flex justify-content-center">
+        <h4>Membros</h4>
+      </div>
+      <hr>
+      {{#each groupData.members}}
+        <li class="list-group-item listMember p-3">
+          <strong>{{this.username}}</strong>
+          <span data-user-id="{{this._id}}">
+            {{#if this.isOnline}} 🟢 {{else}} 🔴 {{/if}}
+          </span>
+        </li>
+      {{else}}
+        <div class="d-flex mt-4 justify-content-center">
+          <h5>Nenhum participante neste grupo</h5>
+        </div>
+      {{/each}}
     </ul>
   </div>
-  
-  <div class="iconMembers">
-    <span class="material-symbols-outlined p-3 text-light members">
-    person_add
+
+  <div class="iconMembers" type="button">
+    <button class="btnTool" onclick="openFormAdd()">
+      <span class="material-symbols-outlined p-3 text-light members">
+        person_add
+      </span>
+    </button>
+  </div>
+  <div class="inputAdd inputContent" id="form">
+    <span class="material-symbols-outlined iconFormAdd">
+      identity_platform
     </span>
+    <input type="text" placeholder="Busque por username" class="form-control">
+    <div class="btns">
+      <button class="btnAction">Add</button>
+    </div>
   </div>
 </div>
 
@@ -47,7 +78,7 @@
     </div>
 </div>
 
-<script src="/socket.io/socket.io.js"></script>
+
 <script>
   const socket = io();
   const groupId = "{{group._id}}"; 
