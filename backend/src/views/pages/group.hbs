@@ -11,17 +11,6 @@
         groups
       </span>
     </button>
-
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const socket = io({query: {userId: "{{user._id}}"} })
-    socket.on("userStatusChange", ({ userId, isOnline }) => {
-    const userElement = document.querySelector(`[data-user-id="${userId}"]`);
-      if (userElement) {
-        userElement.innerHTML = isOnline ? '🟢' : '🔴'; 
-      }
-    });
-  </script>
   </div>
     <ul class="dropdown-menu">
       <div class="d-flex justify-content-center">
@@ -78,9 +67,16 @@
     </div>
 </div>
 
-
+<script src="/socket.io/socket.io.js"></script>
 <script>
-  const socket = io();
+  const socket = io({query: {userId: "{{user._id}}"} })
+    socket.on("userStatusChange", ({ userId, isOnline }) => {
+    const userElement = document.querySelector(`[data-user-id="${userId}"]`)
+      if (userElement) {
+        userElement.innerHTML = isOnline ? '🟢' : '🔴'
+      }
+  });
+  //const socket = io();
   const groupId = "{{group._id}}"; 
   const userId = "{{user._id}}"; 
 
