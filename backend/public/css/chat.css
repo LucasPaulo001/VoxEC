@@ -350,6 +350,12 @@ footer{
   gap: 15px;
   overflow-y: auto;
 }
+.localNoUsers{
+  height: 25vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 @keyframes animeInfo {
   0%{
     box-shadow: 0px 0px red;

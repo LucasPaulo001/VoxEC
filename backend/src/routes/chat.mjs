@@ -14,7 +14,8 @@ chat.get('/chat', isAuthenticated, (req, res) =>{
         .populate('friendRequests', 'username email avatar')
         .populate('friends', 'username email avatar')
         .then((user) => {
-            User.find()
+            User.find({_id: {$nin: [...user.friends, user._id]}})
+            .select('username email avatar')
             .then((users) => {
                 res.render('pages/chat', {
                     dataUser,

@@ -141,6 +141,7 @@
         </div>
       <hr>
         {{!-- Notificações --}}
+        {{#if user.friendRequests.length}}
         <div>
           <div class="d-flex justify-content-center">
             <h5>Solicitações de amizade para você: {{user.friendRequests.length}}</h5>
@@ -166,8 +167,10 @@
             </div>
           {{/each}}
         </div>
+        {{/if}}
       <hr>
       {{!-- Amigos do usuário --}}
+      {{#if users.length}}
       <div class="d-flex localFriends mt-4 justify-content-center">
         <div class="d-flex justify-content-center">
           <h4>Outros usuários</h4>
@@ -195,6 +198,12 @@
           </div>
         {{/each}}
       </div>
+      {{else}}
+      <h3>Outros usuários:</h3>
+        <div class="d-flex localNoUsers justify-content-center">
+          <h4>Nenhum usuário encontrado...</h4>
+        </div>
+      {{/if}}
     </div>
 
     <div class="createGroup mt-4" id="createGroup">
