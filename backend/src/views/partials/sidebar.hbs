@@ -32,16 +32,24 @@
       <div class="cardSettings p-3 mt-4">
         {{!-- Dados básicos (nome e avatar) --}}
         <div>
-          {{!-- <div class="mb-3">
+          <div class="mb-3">
             <h5>Dados básicos</h5>
           </div>
-          <div class="mb-3">
-            <label for="username">Nome de usuário:</label>
-            <input type="text" class="form-control" value="{{dataUser.username}}">
-            <div class="btns">
-              <button class="btnAction">Alterar</button>
-            </div>
-          </div> --}}
+            <form action="/user/modifyName/{{user._id}}" method="post">
+              <div class="mb-3">
+                <label for="username">Nome de usuário:</label>
+                <div class="inputContent">
+                    <span class="material-symbols-outlined iconForm">
+                        person
+                    </span>
+                    <input type="text" value="{{user.username}}" required class="form-control" placeholder="Seu nome de usuário" name="newUsername" id="username">
+                </div>
+              </div>
+              <div class="btns">
+                <button type="submit" class="btnAction">Alterar</button>
+              </div>
+            </form>
+          <hr>
           <div class="mb-3">
             <div class="mb-3">
               <h5>Escolha seu avatar</h5>
@@ -70,27 +78,28 @@
             </div>
           </div>
         </div>
-        {{!-- <hr> --}}
+        <hr>
 
-        {{!-- Segurança (senha) --}}
-        {{!--<div>
+        {{!-- Segurança (Alteração de senha) --}}
+        <div>
            <div class="mb-3">
             <h5>Segurança</h5>
           </div>
-
-          <div class="mb-3">
-            <label for="password">Alterar Senha:</label>
-            <input type="text" class="form-control" placeholder="Digite aqui a nova senha!">
-          </div>
-
-          <div class="mb-3"> --}}
-            {{!--<label for="password">Digite novamente:</label>
-            <input type="text" class="form-control" placeholder="Digite novamente a senha!">
-             <div class="btns">
-              <button class="btnAction">Alterar</button>
-            </div> 
-          </div>
-        </div>--}}
+            <form action="/user/modifyPass/{{user._id}}" method="post">
+              <div class="mb-3">
+                <label for="password">Alterar Senha:</label>
+                <input type="password" class="form-control" placeholder="Digite aqui a nova senha!" name="password">
+              </div>
+    
+              <div class="mb-3">
+                <label for="password">Digite novamente:</label>
+                <input type="password" class="form-control" placeholder="Digite novamente a senha!" name="passwordReap">
+                <div class="btns">
+                  <button type="submit" class="btnAction">Alterar</button>
+                </div>
+              </div>
+            </form>
+        </div>
       </div>
     </div>
 
@@ -111,7 +120,7 @@
         <div class="mt-4">
           <div class="d-flex mb-3 justify-content-center">
             <button onclick="openFriendsData()" class="btn d-flex btn-success">
-              <h4>{{user.friends.length}} Amigos</h4>
+              <h4>{{user.friends.length}} Amigo(s)</h4>
             </button>
           </div>
         </div>
@@ -134,6 +143,10 @@
                     <img src="{{this.avatar}}" height="60px" alt="">
                     {{this.username}}
                   {{/if}}
+                </div>
+              {{else}}
+                <div class="d-flex justify-content-center">
+                  <h4>Nenhum amigo por aqui...</h4>
                 </div>
               {{/each}}
             </div>

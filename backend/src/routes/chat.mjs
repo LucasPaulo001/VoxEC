@@ -3,6 +3,7 @@ import Group from "../models/Group.mjs"
 const chat = Router()
 import isAuthenticated from "../configs/auth.mjs"
 import User from "../models/User.mjs"
+import bcrypt from "bcryptjs"
 
 //Rota para página inicial da aplicação
 chat.get('/chat', isAuthenticated, (req, res) =>{
@@ -172,6 +173,79 @@ chat.post('/addMember/:userId', isAuthenticated, (req, res) => {
         console.log('[debug]: Erro, ', error)
         req.flash('error_msg', 'Erro ao tentar adicionar membro!')
         return res.redirect(req.headers.referer)
+    })
+})
+
+//Rota para mudança de senha
+chat.post('/modifyPass/:idUser', (req, res) => {
+    const { idUser } = req.params
+    const { password, passwordReap } = req.body
+
+    //Autenticação das senhas
+    if(password !== passwordReap){
+        req.flash('error_msg', 'As senhas não coincidem!')
+        console.log('Senhas não coincidem!')
+        return res.redirect(req.headers.referer)
+    }
+    
+    //Configuração de hash e salvamento de nova senha
+    const roundSalts = 10
+    bcrypt
+    .hash(password, roundSalts)
+    .then((newPass) => {
+        User.findByIdAndUpdate(idUser, {
+            password: newPass
+        }, { new: true })
+        .then(() => {
+            req.flash('success_msg', 'Senha alterada com sucesso!')
+            return res.redirect(req.headers.referer)
+        })
+        .catch((error) => {
+            console.log('[debug]: Erro: ', error)
+            req.flash('error_msg', 'Erro ao tentar modificar a senha!')
+            return res.redirect(req.headers.referer)
+        })
+    })
+})
+
+//Rota para mudança de nome de usuário
+chat.post('/modifyName/:idUser', isAuthenticated, (req, res) => {
+    const { idUser } = req.params
+    const { newUsername } = req.body
+
+    User.findById(idUser)
+    .then((user) => {
+        if(!user){
+            req.flash('error_msg', 'Usuário não encontrado!')
+            return res.redirect(req.headers.referer)
+        }
+
+        User.findOne({username: newUsername})
+        .then((existName) => {
+            if(existName){
+                req.flash('error_msg', 'Nome de usuário já existe!')
+                console.log('Nome existente!')
+                return res.redirect(req.headers.referer)
+            }
+
+            User.findByIdAndUpdate(user._id, {
+                username: newUsername
+            }, { new: true })
+            .then(() => {
+                req.flash('success_msg', 'Nome de usuário alterado com sucesso!')
+                return res.redirect(req.headers.referer)
+            })
+            .catch((error) => {
+                console.log('[debug] Erro: ', error)
+                req.flash('error_msg', 'Erro ao tentar alterar nome de usuário!')
+                return res.redirect(req.headers.referer)
+            })
+        })
+        .catch((error) => {
+            req.flash('error_msg', 'Erro ao buscar usuário!')
+            console.log('[debug] Erro: ', error)
+            return res.redirect(req.headers.referer)
+        })
     })
 })
 
