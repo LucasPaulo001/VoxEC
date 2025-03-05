@@ -64,12 +64,12 @@
           <div>
               {{this.username}}
           </div>
-          <form action="/user/addMember/{{this._id}}" method="post">
-          <input type="hidden" value="{{../groupData._id}}" name="idGroup">
-            <div class="btns">
-              <button type="submit" class="btnAction">Add</button>
-            </div>
-          </form>
+            <form action="/user/addMember/{{this._id}}" method="post">
+            <input type="hidden" value="{{../groupData._id}}" name="idGroup">
+              <div class="btns">
+                <button type="submit" class="btnAction">Add</button>
+              </div>
+            </form>
         </div>
       {{else}}
         <div class="d-flex justify-content-center">

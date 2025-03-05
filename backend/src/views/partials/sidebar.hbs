@@ -106,6 +106,39 @@
       <div class="d-flex perfilAvatar justify-content-center">
         <img id="avatarImg" src="{{user.avatar}}" alt="" height="100%">
       </div>
+
+      {{!-- Amigos --}}
+        <div class="mt-4">
+          <div class="d-flex mb-3 justify-content-center">
+            <button onclick="openFriendsData()" class="btn d-flex btn-success">
+              <h4>{{user.friends.length}} Amigos</h4>
+            </button>
+          </div>
+        </div>
+
+        <div class="windowFriends" id="windowFriends">
+          <div class="friendsData" id="friendsData">
+            <span class="material-symbols-outlined closeWindow" id="closeFriends">
+              close
+            </span>
+            <div class="d-flex justify-content-center">
+              <h4>Seus amigos</h4>
+            </div>
+            <div class="localFriendsList">
+              {{#each user.friends}}
+                <div class="listFriend p-3">
+                  {{#if (eq this.avatar "")}}
+                    <img src="/assets/images/anonymous.png" height="60px" alt="">
+                    {{this.username}}
+                  {{else}}
+                    <img src="{{this.avatar}}" height="60px" alt="">
+                    {{this.username}}
+                  {{/if}}
+                </div>
+              {{/each}}
+            </div>
+          </div>
+        </div>
       <hr>
         {{!-- Notificações --}}
         <div>
@@ -136,6 +169,9 @@
       <hr>
       {{!-- Amigos do usuário --}}
       <div class="d-flex localFriends mt-4 justify-content-center">
+        <div class="d-flex justify-content-center">
+          <h4>Outros usuários</h4>
+        </div>
         {{#each users}}
           <div class="cardHero localUser">
             <div>
@@ -223,3 +259,15 @@
     </div>
   </div>
 </div>
+
+<script>
+  const friends = document.getElementById('windowFriends')
+  function openFriendsData(){
+    friends.classList.add('ativeDataFriends')
+  }
+  document.getElementById('windowFriends').addEventListener('click', (event) => {
+    if(event.target.id === 'windowFriends' || event.target.id === 'closeFriends'){
+        document.getElementById('windowFriends').classList.remove('ativeDataFriends')
+    }
+  })
+</script>

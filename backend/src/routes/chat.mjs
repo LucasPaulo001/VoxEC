@@ -12,6 +12,7 @@ chat.get('/chat', isAuthenticated, (req, res) =>{
     .then((dataGroups) => {
         User.findById(req.user._id)
         .populate('friendRequests', 'username email avatar')
+        .populate('friends', 'username email avatar')
         .then((user) => {
             User.find()
             .then((users) => {
