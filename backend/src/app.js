@@ -124,12 +124,14 @@ import register from './routes/register.mjs'
 import chat from './routes/chat.mjs'
 import passport from 'passport'
 import avatarRoute from './routes/avatar.mjs'
+import data from './routes/userData.mjs'
 
 //Configurando rotas
 app.use('/', login)
 app.use('/user', register)
 app.use('/user', chat)
 app.use('/user', avatarRoute)
+app.use('/user', data)
 
 //Conectando ao servidor
 server.listen(process.env.PORT, () => {

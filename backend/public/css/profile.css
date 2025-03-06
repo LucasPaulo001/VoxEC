@@ -1,0 +1,22 @@
+.containerDataP{
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-bottom: 40px;
+    margin: 10px;
+}
+.profileAvatar{
+    height: 50%;
+}
+.contentAvatar{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contentProfile{
+    height: 100vh;
+    padding: 20px;
+}

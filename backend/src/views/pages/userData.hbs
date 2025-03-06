@@ -1,0 +1,17 @@
+<div class="contentProfile">
+    <div class="containerDataP cardHero">
+        {{#if (eq user.avatar "")}}
+            <img src="/assets/images/anonymous.png" class="profileAvatar" alt="">
+        {{else}}
+            <img src="{{user.avatar}}" class="profileAvatar" alt="">
+        {{/if}}
+        <h4>{{user.username}}</h4>
+        <div class="mt-4">
+          <div class="d-flex mb-3 justify-content-center">
+            <button onclick="openFriendsData()" class="btn d-flex btn-success">
+              <h4>{{user.friends.length}} Amigo(s)</h4>
+            </button>
+          </div>
+        </div>
+    </div>
+</div>

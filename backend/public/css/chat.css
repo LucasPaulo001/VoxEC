@@ -314,7 +314,7 @@ footer{
   justify-content: center;
   height: 0;
   overflow: hidden;
-  z-index: 999;
+  z-index: 99999;
   background-color: #0000001a;
   backdrop-filter: blur(1px);
 }
@@ -340,6 +340,9 @@ footer{
   background-color: var(--bs-purple);
   color: white;
   border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .localFriendsList{
   display: flex;

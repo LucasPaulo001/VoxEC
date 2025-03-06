@@ -124,34 +124,6 @@
             </button>
           </div>
         </div>
-
-        <div class="windowFriends" id="windowFriends">
-          <div class="friendsData" id="friendsData">
-            <span class="material-symbols-outlined closeWindow" id="closeFriends">
-              close
-            </span>
-            <div class="d-flex justify-content-center">
-              <h4>Seus amigos</h4>
-            </div>
-            <div class="localFriendsList">
-              {{#each user.friends}}
-                <div class="listFriend p-3">
-                  {{#if (eq this.avatar "")}}
-                    <img src="/assets/images/anonymous.png" height="60px" alt="">
-                    {{this.username}}
-                  {{else}}
-                    <img src="{{this.avatar}}" height="60px" alt="">
-                    {{this.username}}
-                  {{/if}}
-                </div>
-              {{else}}
-                <div class="d-flex justify-content-center">
-                  <h4>Nenhum amigo por aqui...</h4>
-                </div>
-              {{/each}}
-            </div>
-          </div>
-        </div>
       <hr>
         {{!-- Notificações --}}
         {{#if user.friendRequests.length}}
@@ -281,15 +253,3 @@
     </div>
   </div>
 </div>
-
-<script>
-  const friends = document.getElementById('windowFriends')
-  function openFriendsData(){
-    friends.classList.add('ativeDataFriends')
-  }
-  document.getElementById('windowFriends').addEventListener('click', (event) => {
-    if(event.target.id === 'windowFriends' || event.target.id === 'closeFriends'){
-        document.getElementById('windowFriends').classList.remove('ativeDataFriends')
-    }
-  })
-</script>
