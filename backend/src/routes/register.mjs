@@ -7,11 +7,14 @@ const register = Router()
 import dotenv from "dotenv"
 dotenv.config()
 
+//Rota que renderiza a viw de registro
 register.get('/register', (req, res) => {
     res.render('pages/register')
 })
 
+//Rota para se registrar
 register.post('/register', (req, res) => {
+    //Pegando dados do formulário
     const { username, email, password, passwordRep, birth } = req.body
 
     //Validações
@@ -82,9 +85,12 @@ register.post('/register', (req, res) => {
     })
 })
 
+//Rota para validação de tokken
 register.get('/verifyEmail/:token', (req, res) => {
+    //Pegando token da url
     const {token} = req.params
 
+    //Buscando usuário pelo token
     User.findOne({tokenVerificacao: token})
     .then((usuario) => {
         if(!usuario){
