@@ -106,7 +106,7 @@
     {{!-- Página do perfil de usuário --}}
     <div class="account mt-4" id="account">
       <div class="d-flex justify-content-center">
-        <h4>Seu Avatar</h4>
+        <h4>Meu perfil</h4>
       </div>
       <hr>
       {{!-- Nome do usuário --}}
@@ -123,8 +123,18 @@
               <h4>{{user.friends.length}} Amigo(s)</h4>
             </button>
           </div>
+          <div class="btns">
+          <a class="text-decoration-none" href="/user/studies/{{user._id}}">
+            <button class="btn d-flex gap-2 btn-light">Meus estudos
+              <span class="material-symbols-outlined">
+                school
+              </span>
+            </button>
+          </a>
+        </div>
         </div>
       <hr>
+      
         {{!-- Notificações --}}
         {{#if user.friendRequests.length}}
         <div>

@@ -1,0 +1,141 @@
+<div class="cardHero cardTopicStudies p-3 d-flex">
+    <div>
+        <h2>Aqui você pode organizar os seus estudos!</h2>
+        <small>Começe criando um card e a partir dele você poderá criar tasks para se organizar melhor!</small>
+    </div>
+    <div class="iconImage">
+        <img src="/assets/images/study.png" alt="">
+    </div>
+</div>
+<div class="container">
+    <div class="btns">
+        <button class="btnAdd" onclick="openCreateTopic()">
+            <span class="material-symbols-outlined add" id="addTopic">
+                add
+            </span>
+        </button>
+    </div>
+    <div class="createCard" id="create-card">
+        <form action="/user/studies/createTopic" method="post">
+            <input type="hidden" value="{{user._id}}" name="UserId">
+            <div class="mb-3">
+                <h4>Criar novo Tópico de estudos</h4>
+                <small>A partir daqui você pode criar um novo card de estudos, dê um título e uma descrição!</small>
+            </div>
+            <hr>
+            <div class="mb-3">
+                <label for="title">Título: </label>
+                <input type="text" placeholder="Título do tópico" class="form-control" name="title">
+            </div>
+            <div class="mb-3">
+                <label for="descripion">Descrição: </label>
+                <textarea placeholder="Descrição do tópico..." class="form-control" name="description"
+                    id="descripion"></textarea>
+            </div>
+            <hr>
+            <div class="mb-3 btns">
+                <button class="btnAction">Salvar</button>
+            </div>
+        </form>
+    </div>
+    <div class="containerCards mt-4">
+        {{#each dataCard}}
+        <div class="cardStudy">
+            <div class="top">
+                <h5>{{this.title}}</h5>
+            </div>
+            <div class="cardBody">
+                <p>{{this.description}}</p>
+            </div>
+            <div class="btns">
+                <button data-id="{{this._id}}" onclick="openCreateTask(this)" class="btnAction">Tasks</button>
+            </div>
+        </div>
+
+        <div class="windowTasks" id="windowTasks-{{this._id}}">
+            <div class="tasks">
+                <span class="material-symbols-outlined closeWindow" id="closeTask">
+                    close
+                </span>
+                <div class="windowBody">
+                    <div class="d-flex justify-content-center">
+                        <h4>Lista de Tarefas</h4>
+                    </div>
+                    <hr>
+                    <div class="btns">
+                        <button data-id="{{this._id}}" class="btnAdd" onclick="openViewTask(this)">
+                            <span class="material-symbols-outlined add" id="addTask">
+                                add
+                            </span>
+                        </button>
+                    </div>
+                    <div class="createTask" id="create-task-{{this._id}}">
+                        <form action="/user/studies/createTask" method="post">
+                            <input type="hidden" value="{{this._id}}" name="topicId">
+                            <div class="mb-3">
+                                <h4>Criar nova Task</h4>
+                                <small>A partir daqui você pode organizar o que estudar sobre
+                                    <i><strong>{{this.title}}</strong></i>!</small>
+                            </div>
+                            <hr>
+                            <div class="mb-3">
+                                <label for="title">Título: </label>
+                                <input type="text" placeholder="Título da Task" class="form-control" name="title">
+                            </div>
+                            <hr>
+                            <div class="mb-3 btns">
+                                <button class="btnAction">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="listTasks">
+                {{#each this.tasks}}
+                    <div class="d-flex localTask align-items-center justify-content-between">
+                        <div>
+                            <h3>{{this.title}}</h3>
+                        </div>
+                    </div>
+                {{else}}
+                    <div class="d-flex text-dark mt-4 justify-content-center">
+                        <h4>Nenhuma task por aqui...</h4>
+                    </div>
+                {{/each}}
+                </div>
+            </div>
+        </div>
+
+        {{else}}
+        <div class="d-flex text-light justify-content-center">
+            <h4>Nenhum card por aqui...</h4>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<script>
+    const windowCreate = document.getElementById('create-card')
+    function openCreateTopic() {
+        windowCreate.classList.toggle('ativeCreate')
+    }
+
+    function openCreateTask(id) {
+        const idWindow = id.getAttribute('data-id')
+        const newId = document.getElementById(`windowTasks-${idWindow}`)
+        newId.classList.add('ativeTask')
+    }
+
+    document.querySelectorAll('.windowTasks').forEach(window => {
+        window.addEventListener('click', (btn) => {
+            if (btn.target.id === 'closeTask') {
+                window.classList.remove('ativeTask')
+            }
+        })
+    })
+    const windowTask = document.getElementById('create-task')
+    function openViewTask(btn) {
+        const btnId = btn.getAttribute('data-id')
+        const btnForm = document.getElementById(`create-task-${btnId}`)
+        btnForm.classList.toggle('ativeWindowCreate')
+    }
+</script>
