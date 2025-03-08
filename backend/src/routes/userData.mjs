@@ -98,5 +98,21 @@ data.post('/studies/createTask', isAuthenticated, (req, res) => {
     })
 })
 
+//Rota para modificação de estado das tasks
+data.put('/studies/updateTask', (req, res) => {
+    const { taskId, status } = req.body
+
+    if (!taskId || !status) {
+        return res.status(400).json({ error: "Dados inválidos." });
+    }
+
+    StudyTask.findByIdAndUpdate(taskId, {status}, { new: true })
+    .then(() => res.json({ message: "Task atualizada com sucesso!" }))
+    .catch(error => {
+        console.error("Erro ao atualizar task:", error)
+        res.status(500).json({ error: "Erro no servidor." })
+    })
+})
+
 
 export default data

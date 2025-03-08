@@ -8,6 +8,7 @@ import { create } from 'express-handlebars'
 import dotenv from 'dotenv'
 import session from 'express-session'
 import flash from 'connect-flash'
+import cors from 'cors'
 dotenv.config()
 
 //Configurações do servidor e do socket
@@ -53,6 +54,7 @@ io.on("connection", (socket) => {
 })
 
 //Configuração de parse json e dados de formulário
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 

@@ -47,6 +47,10 @@
             <div class="cardBody">
                 <p>{{this.description}}</p>
             </div>
+            <hr>
+            <div class="d-flex justify-content-center">
+                <h5>{{this.tasks.length}} Tasks</h5>
+            </div>
             <div class="btns">
                 <button data-id="{{this._id}}" onclick="openCreateTask(this)" class="btnAction">Tasks</button>
             </div>
@@ -69,7 +73,16 @@
                             </span>
                         </button>
                     </div>
-                    <div class="createTask" id="create-task-{{this._id}}">
+                    {{#if this.tasks.length}}
+                        <small class="textProg">Seu progresso:</small>
+                        <div class="progress">
+                            <div class="progress-bar" id="progress-bar-{{this._id}}" role="progressbar" style="width: 0%;" 
+                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                                0%
+                            </div>
+                        </div>
+                    {{/if}}
+                    <div class="createTask mt-4" id="create-task-{{this._id}}">
                         <form action="/user/studies/createTask" method="post">
                             <input type="hidden" value="{{this._id}}" name="topicId">
                             <div class="mb-3">
@@ -92,8 +105,17 @@
                 <div class="listTasks">
                 {{#each this.tasks}}
                     <div class="d-flex localTask align-items-center justify-content-between">
+                        <div class="title">
+                            <h5>{{this.title}}</h5>
+                        </div>
                         <div>
-                            <h3>{{this.title}}</h3>
+                            <div class="form-check p-3">
+                                <input data-id="{{this._id}}" class="form-check-input task-checkbox" type="checkbox" value="" id="taskCheck-{{this._id}}"
+                                {{#if (eq this.status "concluído")}} checked {{/if}}>
+                                <label class="form-check-label" for="taskCheck-{{this._id}}">
+                                    Concluído
+                                </label>
+                            </div>
                         </div>
                     </div>
                 {{else}}
@@ -114,17 +136,20 @@
 </div>
 
 <script>
+    //Função para ativar e desativar janela de criação de card
     const windowCreate = document.getElementById('create-card')
     function openCreateTopic() {
         windowCreate.classList.toggle('ativeCreate')
     }
 
+    //Função para ativar janela de criação de task
     function openCreateTask(id) {
         const idWindow = id.getAttribute('data-id')
         const newId = document.getElementById(`windowTasks-${idWindow}`)
         newId.classList.add('ativeTask')
     }
 
+    //Evento para fechar a janela de task
     document.querySelectorAll('.windowTasks').forEach(window => {
         window.addEventListener('click', (btn) => {
             if (btn.target.id === 'closeTask') {
@@ -132,6 +157,8 @@
             }
         })
     })
+
+    //Evento para ativar e desativar janela de criação de task
     const windowTask = document.getElementById('create-task')
     function openViewTask(btn) {
         const btnId = btn.getAttribute('data-id')
