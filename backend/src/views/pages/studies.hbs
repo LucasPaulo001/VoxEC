@@ -51,8 +51,11 @@
             <div class="d-flex justify-content-center">
                 <h5>{{this.tasks.length}} Tasks</h5>
             </div>
-            <div class="btns">
+            <div id="btnActions" class="btns">
                 <button data-id="{{this._id}}" onclick="openCreateTask(this)" class="btnAction">Tasks</button>
+                <form action="/user/studies/delete/{{this._id}}" method="post">
+                    <button type="submit" class="btnDelete">Deletar</button>
+                </form>
             </div>
         </div>
 

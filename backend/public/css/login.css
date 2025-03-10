@@ -25,6 +25,22 @@ body{
     transition: .2s ease-in-out;
     box-shadow: 4px 4px;
 }
+.btnDelete{
+    color: red;
+    background-color: white;
+    border: 1px solid var(--colorBottons);
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+    transition: .2s ease-in-out;
+    box-shadow: 4px 4px #ff000087;
+}
+.btnDelete:hover{
+    background-image: linear-gradient(to right, red, rgba(255, 0, 0, 0.404));
+    color: white;
+    border: 1px solid transparent;
+    box-shadow: 4px 4px 9px 0px var(--colorBottons);
+}
 .btnAction:hover{
     background-image: linear-gradient(to right, var(--colorBottons), var(--colorBottons02));
     color: white;
@@ -36,6 +52,12 @@ body{
     justify-content: center;
     gap: 30px;
     padding: 15px;
+}
+#btnActions{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0;
 }
 .login, .logo{
     height:95%;

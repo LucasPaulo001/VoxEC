@@ -77,6 +77,26 @@ data.post('/studies/createTopic', (req, res) => {
     })
 })
 
+//Rota para deletar card
+data.post('/studies/delete/:idCard', (req, res) => {
+    //Pegando id do card a ser excluído 
+    const { idCard } = req.params
+    //Buscando e excluindo card
+    StudyTask.deleteMany({topicId: idCard})
+    .then(() => {
+        return StudyTopic.findByIdAndDelete(idCard)
+    })
+    .then(() => {
+        req.flash('success_msg', 'Card deletado com sucesso!')
+        return res.redirect(req.headers.referer)
+    })
+    .catch((error) => {
+        console.log('[debug] Erro: ', error)
+        req.flash('error_msg', 'Erro ao tentar deletar Card!')
+        return res.redirect(req.headers.referer)
+    })
+})
+
 //Rota para criar tasks
 data.post('/studies/createTask', isAuthenticated, (req, res) => {
     const { title, topicId, status } = req.body
@@ -113,6 +133,7 @@ data.put('/studies/updateTask', (req, res) => {
         res.status(500).json({ error: "Erro no servidor." })
     })
 })
+
 
 
 export default data
