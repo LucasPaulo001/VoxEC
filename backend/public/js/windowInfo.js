@@ -10,6 +10,11 @@ const friends = document.getElementById('windowFriends')
 
 function openEdit(id){
   const idCard = id.getAttribute('data-id')
-  const window = document.getElementById('windowEdit')
+  const window = document.getElementById(`windowEdit-${idCard}`)
   window.classList.add('ativeEdit')
 }
+document.querySelectorAll('.windowEdit').forEach(window => {
+  window.addEventListener('click', () => {
+    window.classList.remove('ativeEdit')
+  })
+})

@@ -68,10 +68,13 @@
         </div>
 
         {{!-- Janela de edição --}}
-        <div class="windowEdit" id="windowEdit">
+        <div class="windowEdit" id="windowEdit-{{this._id}}">
             <div class="localEdition">
+                <span id="closeEdit"
+                    class="material-symbols-outlined closeWindow">
+                    close
+                </span>
                 <form action="/user/studies/editCard/{{this._id}}" method="post">
-                    {{!-- <input type="hidden" value="{{user._id}}" name="UserId"> --}}
                     <div class="mb-3">
                         <h4>Editar Card</h4>
                     </div>

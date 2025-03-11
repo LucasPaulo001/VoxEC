@@ -168,6 +168,12 @@
 }
 
 @media(max-width: 640px){
+    .localEdition {
+        width: 95%;
+    }
+    .container{
+        margin-bottom: 10%;
+    }
     .title{
         width: 150px;
     }

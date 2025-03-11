@@ -18,7 +18,7 @@ export function passportConfig(passport){
             }
             // Verifica se o e-mail foi verificado
             if (!usuario.emailVerificado) {
-                return done(null, false, { message: 'Você está sem acesso no momento!😞' })
+                return done(null, false, { message: `Você está sem acesso no momento!😞, Valide a sua conta para ter acesso! (Enviamos um E-mail para ${email})` })
             }
             bcrypt.compare(password, usuario.password, (error, isMatch) => {
                 if(isMatch){
@@ -28,7 +28,7 @@ export function passportConfig(passport){
                     return done(null, false, {message: 'Senha incorreta!'})
                 }
             })
-        }).catch((error) => error)
+        }).catch((error) => done(error))
     }))
 
     passport.serializeUser((usuario, done) => {
