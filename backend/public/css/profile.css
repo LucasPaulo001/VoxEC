@@ -89,7 +89,7 @@
 .createCard form input, .createTask form input{
     text-indent: 0px !important;
 }
-.windowTasks{
+.windowTasks, .windowEdit{
     height: 0;
     overflow: hidden;
     background-color: #00000021;
@@ -103,10 +103,11 @@
     justify-content: center;
     z-index: 999;
 }
-.windowTasks.ativeTask{
+.windowTasks.ativeTask, .windowEdit.ativeEdit{
     height: 100vh;
     overflow: visible;
 }
+
 .tasks{
     overflow-y: auto;
     background-color: #ffffff96;
@@ -143,6 +144,27 @@
     gap: 20px;
     display: flex;
     flex-direction: column;
+}
+.edit{
+    font-size: 2em !important;
+    width: 30px;
+    cursor: pointer;
+}
+.localEdit{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.336);
+    display: flex !important;
+    justify-content: center;
+}
+.localEdition{
+    background-color: #ffffff7a;
+    width: 60%;
+    backdrop-filter: blur(3px);
+    border: 2px solid white;
+    padding: 20px;
+    border-radius: 10px;
+}
+.localEdition form input{
+    text-indent: 0;
 }
 
 @media(max-width: 640px){

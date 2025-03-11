@@ -77,6 +77,28 @@ data.post('/studies/createTopic', (req, res) => {
     })
 })
 
+//Rota para editar card
+data.post('/studies/editCard/:idCard', (req, res) => {
+    const { idCard } = req.params
+    const { title, description } = req.body
+
+    StudyTopic.findById(idCard)
+    .then((dataCard) => {
+        dataCard.title = title
+        dataCard.description = description
+
+        dataCard.save()
+        
+        req.flash('success_msg', 'Dados de card atualizados!')
+        return res.redirect(req.headers.referer)
+    })
+    .catch((error) => {
+        req.flash('error_msg', 'Erro ao atualizar dados do Card!')
+        console.log('[debug] Erro: ', error)
+        return res.redirect(req.headers.referer)
+    })
+})
+
 //Rota para deletar card
 data.post('/studies/delete/:idCard', (req, res) => {
     //Pegando id do card a ser excluído 

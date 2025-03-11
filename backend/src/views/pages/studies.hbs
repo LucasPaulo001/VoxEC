@@ -41,8 +41,16 @@
     <div class="containerCards mt-4">
         {{#each dataCard}}
         <div class="cardStudy">
+
             <div class="top">
                 <h5>{{this.title}}</h5>
+                <div class="localEdit">
+                    <span data-id="{{this._id}}" onclick="openEdit(this)" title="Editar Card"
+                        class="material-symbols-outlined edit">
+                        edit_note
+                    </span>
+                </div>
+
             </div>
             <div class="cardBody">
                 <p>{{this.description}}</p>
@@ -59,6 +67,33 @@
             </div>
         </div>
 
+        {{!-- Janela de edição --}}
+        <div class="windowEdit" id="windowEdit">
+            <div class="localEdition">
+                <form action="/user/studies/editCard/{{this._id}}" method="post">
+                    {{!-- <input type="hidden" value="{{user._id}}" name="UserId"> --}}
+                    <div class="mb-3">
+                        <h4>Editar Card</h4>
+                    </div>
+                    <hr>
+                    <div class="mb-3">
+                        <label for="title">Título: </label>
+                        <input type="text" placeholder="Título do tópico" class="form-control" value="{{this.title}}" name="title">
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripion">Descrição: </label>
+                        <textarea placeholder="Descrição do tópico..." class="form-control" name="description"
+                            id="descripion">{{this.description}}</textarea>
+                    </div>
+                    <hr>
+                    <div class="mb-3 btns">
+                        <button type="submit" class="btnAction">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        {{!-- Janela de tasks --}}
         <div class="windowTasks" id="windowTasks-{{this._id}}">
             <div class="tasks">
                 <span class="material-symbols-outlined closeWindow" id="closeTask">
@@ -77,13 +112,13 @@
                         </button>
                     </div>
                     {{#if this.tasks.length}}
-                        <small class="textProg">Seu progresso:</small>
-                        <div class="progress">
-                            <div class="progress-bar" id="progress-bar-{{this._id}}" role="progressbar" style="width: 0%;" 
-                                aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                                0%
-                            </div>
+                    <small class="textProg">Seu progresso:</small>
+                    <div class="progress">
+                        <div class="progress-bar" id="progress-bar-{{this._id}}" role="progressbar" style="width: 0%;"
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            0%
                         </div>
+                    </div>
                     {{/if}}
                     <div class="createTask mt-4" id="create-task-{{this._id}}">
                         <form action="/user/studies/createTask" method="post">
@@ -106,26 +141,27 @@
                     </div>
                 </div>
                 <div class="listTasks">
-                {{#each this.tasks}}
+                    {{#each this.tasks}}
                     <div class="d-flex localTask align-items-center justify-content-between">
                         <div class="title">
                             <h5>{{this.title}}</h5>
                         </div>
                         <div>
                             <div class="form-check p-3">
-                                <input data-id="{{this._id}}" class="form-check-input task-checkbox" type="checkbox" value="" id="taskCheck-{{this._id}}"
-                                {{#if (eq this.status "concluído")}} checked {{/if}}>
+                                <input data-id="{{this._id}}" class="form-check-input task-checkbox" type="checkbox"
+                                    value="" id="taskCheck-{{this._id}}" {{#if (eq this.status "concluído" )}} checked
+                                    {{/if}}>
                                 <label class="form-check-label" for="taskCheck-{{this._id}}">
                                     Concluído
                                 </label>
                             </div>
                         </div>
                     </div>
-                {{else}}
+                    {{else}}
                     <div class="d-flex text-dark mt-4 justify-content-center">
                         <h4>Nenhuma task por aqui...</h4>
                     </div>
-                {{/each}}
+                    {{/each}}
                 </div>
             </div>
         </div>

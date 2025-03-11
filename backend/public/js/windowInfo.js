@@ -7,3 +7,9 @@ const friends = document.getElementById('windowFriends')
         document.getElementById('windowFriends').classList.remove('ativeDataFriends')
     }
   })
+
+function openEdit(id){
+  const idCard = id.getAttribute('data-id')
+  const window = document.getElementById('windowEdit')
+  window.classList.add('ativeEdit')
+}
