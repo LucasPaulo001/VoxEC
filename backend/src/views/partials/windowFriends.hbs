@@ -1,0 +1,38 @@
+{{!-- Janela de amigos --}}
+<div class="windowFriends" id="windowFriends">
+    <div class="friendsData" id="friendsData">
+        <span class="material-symbols-outlined closeWindow" id="closeFriends">
+            close
+        </span>
+        <div class="d-flex justify-content-center">
+            <h4>Amigos de {{user.username}}</h4>
+        </div>
+        <div class="localFriendsList">
+            {{#each user.friends}}
+            <div class="listFriend p-3">
+                {{#if (eq this.avatar "")}}
+                <div>
+                    <img src="/assets/images/anonymous.png" height="60px" alt="">
+                    {{this.username}}
+                </div>
+                <div class="btns">
+                    <a href="/user/profile/{{this._id}}"><button class="btnAction">Info</button></a>
+                </div>
+                {{else}}
+                <div>
+                    <img src="{{this.avatar}}" height="60px" alt="">
+                    {{this.username}}
+                </div>
+                <div class="btns">
+                    <a href="/user/profile/{{this._id}}"><button class="btnAction">Info</button></a>
+                </div>
+                {{/if}}
+            </div>
+            {{else}}
+            <div class="d-flex justify-content-center">
+                <h4>Nenhum amigo por aqui...</h4>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

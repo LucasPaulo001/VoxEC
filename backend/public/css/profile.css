@@ -1,0 +1,201 @@
+.containerDataP {
+    backdrop-filter: blur(1px);
+    padding: 20px;
+    background-color: #ffffff61;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-bottom: 40px;
+    margin: 10px;
+    border-radius: 10px;
+}
+.profileAvatar{
+    height: 50%;
+}
+.contentAvatar{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.contentProfile{
+    display: flex;
+    justify-content: center;
+}
+.cardTopicStudies{
+    margin: 10px;
+    align-items: center;
+    justify-content: space-between !important;
+}
+.iconImage{
+    height: 100px;
+}
+.iconImage img{
+    height: 100%;
+}
+.cardStudy{
+    display: grid;
+    grid-template-rows: 1fr;
+    width: 200px;
+    border: 1px solid white;
+    border-radius: 15px;
+    padding: 10px;
+    color: white;
+    background-color: #ffffff40;
+    backdrop-filter: blur(5px);
+    justify-items: center;
+}
+.top{
+    display: flex;
+    flex-direction: column;
+}
+.top h5{
+    border-bottom: 1px solid #ffffff63;
+    padding-bottom: 10px;
+}
+.createCard{
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff3d;
+    border-radius: 20px;
+    backdrop-filter: blur(1px);
+    margin: 20px;
+}
+.createTask{
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.createCard.ativeCreate{
+    height: auto;
+    overflow: visible;
+}
+.createTask.ativeWindowCreate{
+    margin-bottom: 30px;
+    height: auto;
+    overflow: hidden;
+    background-color: var(--backgroundBlur);
+    border-radius: 20px;
+    border: 2px solid var(--bs-blue);
+}
+.createCard form, .createTask form{
+    padding: 10px;
+    color: white;
+    width: 50%;
+}
+.createCard form input, .createTask form input{
+    text-indent: 0px !important;
+}
+.windowTasks, .windowEdit{
+    height: 0;
+    overflow: hidden;
+    background-color: #00000021;
+    backdrop-filter: blur(5px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+.windowTasks.ativeTask, .windowEdit.ativeEdit{
+    height: 100vh;
+    overflow: visible;
+}
+
+.tasks{
+    overflow-y: auto;
+    background-color: #ffffff96;
+    padding: 10px;
+    width: 90%;
+    height: 90%;
+    border-radius: 20px;
+    backdrop-filter: blur(1px);
+    position: relative;
+}
+.containerCards{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 25px;
+    justify-items: center;
+}
+.localCheck{
+    background-color: rgba(255, 255, 255, 0.082);
+    backdrop-filter: blur(2px);
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.localTask{
+    border: 1px solid var(--backgroun01);
+    padding: 5px;
+    border-radius: 10px;
+    background-color: #ffffff7d;
+}
+.listTasks{
+    overflow-y: auto;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.edit{
+    font-size: 2em !important;
+    width: 30px;
+    cursor: pointer;
+}
+.localEdit{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.336);
+    display: flex !important;
+    justify-content: center;
+}
+.localEdition{
+    background-color: #ffffff7a;
+    width: 60%;
+    backdrop-filter: blur(3px);
+    border: 2px solid white;
+    padding: 20px;
+    border-radius: 10px;
+}
+.localEdition form input{
+    text-indent: 0;
+}
+.localImage{
+    height: 120px;
+    display: flex;
+    align-items: center;
+}
+.localImage img{
+    height: 100%;
+}
+.groupsUser{
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+}
+
+@media(max-width: 640px){
+    .contentProfile{
+        padding-bottom: 20%;
+    }
+    .localEdition {
+        width: 95%;
+    }
+    .container{
+        margin-bottom: 10%;
+    }
+    .title{
+        width: 150px;
+    }
+    .createCard form{
+        width: 100%;
+    }
+}

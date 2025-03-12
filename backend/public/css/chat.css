@@ -1,0 +1,396 @@
+:root{
+    --colorBottons: #4F30BF;
+    --colorBottons02: #e951fd;
+    --backgroun01: #292259;
+}
+#open-msg{
+    display: flex;
+    gap: 10px;
+}
+.cta {
+    display: flex;
+    padding: 11px 33px;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    background: #6225e6;
+    transition: 1s;
+    box-shadow: 6px 6px 0 black;
+    transform: skewX(-15deg);
+    border: none;
+    cursor: pointer;
+  }
+  
+  .cta:focus {
+    outline: none;
+  }
+  
+  .cta:hover {
+    transition: 0.5s;
+    box-shadow: 10px 10px 0 white;
+  }
+  
+  .cta .second {
+    transition: 0.5s;
+    margin-right: 0px;
+  }
+  
+  .cta:hover .second {
+    transition: 0.5s;
+    margin-right: 45px;
+  }
+  
+  .span {
+    transform: skewX(15deg);
+  }
+  
+  .second {
+    width: 20px;
+    margin-left: 30px;
+    position: relative;
+    top: 12%;
+  }
+  
+  .one {
+    transition: 0.4s;
+    transform: translateX(-60%);
+  }
+  
+  .two {
+    transition: 0.5s;
+    transform: translateX(-30%);
+  }
+  
+  .cta:hover .three {
+    animation: color_anim 1s infinite 0.2s;
+  }
+  
+  .cta:hover .one {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.6s;
+  }
+  
+  .cta:hover .two {
+    transform: translateX(0%);
+    animation: color_anim 1s infinite 0.4s;
+  }
+  
+  @keyframes color_anim {
+    0% {
+      fill: white;
+    }
+  
+    50% {
+      fill: #fbc638;
+    }
+  
+    100% {
+      fill: white;
+    }
+  }
+
+.offcanvas-header{
+    background-color: #2B2360;
+    color: white;
+}
+.offcanvas-body{
+    background-image: linear-gradient(to left, #6F38A6, #4F30BF);
+    color: white;
+    border-right: 3px solid white;
+}
+.btnAdd{
+    border: 1px solid white;
+    border-radius: 20px;
+    background-color: transparent;
+    color: white;
+    width: 30px;
+    display: flex;
+    font-size: 2vw;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+    transition: .2s ease-in-out;
+}
+    
+.btnAdd:hover{
+    transform: scale(1.2);
+    box-shadow: 0px 0px 10px 0px; 
+}
+.cardHero{
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.397);
+    backdrop-filter: blur();
+    color: white;
+}
+.bottonsTool{
+    gap: 20px;
+}
+.contentCards{
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 5rem !important;
+}
+.mainContent{
+  margin-bottom: 20%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+.contentGif{
+  display: flex;
+  color: white;
+  height: 300px;
+  width: 100%;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
+.contentGif img{
+  border-radius: 20px;
+  background-color: black;
+  height: 100%;
+}
+.text{
+  text-align: end;
+}
+.card{
+    background-color: rgba(255, 255, 255, 0.178) !important;
+    backdrop-filter: blur(5px);
+    width: 100% !important;
+    height: 50% !important;
+    border: 2px solid var(--backgroun01) !important;
+    box-shadow: 11px -8px 16px var(--backgroun01);
+    transform: rotate(10deg);
+    transition: .4s;
+}
+.card-body{
+  transform: rotate(-11deg);
+  background-color: #292259ad;
+  backdrop-filter: blur(1px);
+  border-radius: 5px;
+  border: 1px solid white;
+  transition: .4s;
+}
+.card:hover{
+  box-shadow: 8px 8px 16px var(--backgroun01); 
+  transform: rotate(0deg);
+}
+.card-body:hover{
+  transform: rotate(0deg);
+}
+footer{
+  height: 20vh;
+  width: 100%;
+  background-color: var(--backgroun01);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.iconForm{
+  color: black;
+}
+.createGroup, .account, .settings{
+  height: 0px;
+  overflow: hidden;
+}
+.createGroup.ativeCreate, .settings.ativeSettings, .account.ativeAccount{
+  height: auto;
+  overflow: visible;
+}
+
+.cardSettings{
+  background-color: white;
+  color: black;
+  border-radius: 15px;
+}
+
+.btnCreate{
+  color: white;
+  background-color: var(--backgroun01);
+  border: 1px solid white;
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+  transition: .2s ease-in-out;
+  box-shadow: 4px 4px;
+}
+.btnCreate:hover{
+  background-image: linear-gradient(to right, var(--colorBottons), var(--colorBottons02));
+  color: white;
+  border: 1px solid transparent;
+  box-shadow: 4px 4px 9px 0px white;
+}
+.list-group{
+  gap: 20px !important;
+}
+.itemGroup{
+  cursor: pointer;
+  background-color: #ffffff70 !important;
+  backdrop-filter: blur(1px);
+  color: white !important;
+  transition: .4s;
+  border-radius: 15px !important;
+}
+.itemGroup:hover{
+  background-color: #2922594b !important;
+}
+.avatarContainer{
+  gap: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.avatar.avatarSelected{
+  border: 3px solid var(--colorBottons);
+}
+.avatarContainer img{
+  height: 100px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.avatarContainer img:hover{
+  border: 1px solid var(--backgroun01);
+}
+.perfilAvatar{
+  height: 25vh;
+  align-items: center;
+}
+.avatarHeight{
+  height: 90px;
+}
+.avatarNone{
+  height: 80px;
+  border-radius: 50px;
+  border: 1px solid white;
+}
+.localUser{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+.localFriends{
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  height: 80vh;
+}
+.btnAddF{
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.localSolicitation{
+    padding: 10px;
+    flex-direction: column;
+    gap: 15px;
+}
+.dataSolicitation{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+.animationInfo{
+  animation: animeInfo 2s infinite ease-in-out;
+  border: 1px solid white !important;
+}
+.windowFriends{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 0;
+  overflow: hidden;
+  z-index: 99999;
+  background-color: #0000001a;
+  backdrop-filter: blur(1px);
+}
+.windowFriends.ativeDataFriends{
+  height: 100vh;
+  overflow: visible;
+}
+.friendsData {
+  height: 90%;
+  backdrop-filter: blur(1px);
+  width: 70%;
+  background-color: #ffffffc9;
+  border-radius: 20px;
+  color: black;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+}
+.listFriend{
+  background-color: var(--bs-purple);
+  color: white;
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.localFriendsList{
+  display: flex;
+  width: 80%;
+  height: 80%;
+  flex-direction: column;
+  gap: 15px;
+  overflow-y: auto;
+}
+.localNoUsers{
+  height: 25vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@keyframes animeInfo {
+  0%{
+    box-shadow: 0px 0px red;
+  }
+  50%{
+    box-shadow: 0px 0px 19px 5px red; 
+  } 
+  100%{
+    box-shadow: 0px 0px red;
+  }
+}
+@media(max-width: 690px){
+    .friendsData{
+      width: 90%;
+    }
+    .localFriendsList{
+      width: 90%;
+    }
+    .localFriends{
+      height: 60vh;
+    }
+    .contentCards{
+        align-items: center;
+        flex-direction: column;
+        gap: 50px;
+        padding-bottom: 20%;
+    }
+    .card{
+      width: 90% !important;
+    }
+    .contentGif{
+      flex-direction: column;
+    }
+    .text{
+      text-align: center;
+    }
+    .contentGif img{
+      width: 90%;
+      height: 90%;
+    }
+}

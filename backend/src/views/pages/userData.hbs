@@ -1,0 +1,52 @@
+<div class="contentProfile">
+  <div class="containerDataP">
+    {{#if (eq user.avatar "")}}
+    <div class="localImage">
+      <img src="/assets/images/anonymous.png" class="profileAvatar" alt="">
+    </div>
+    {{else}}
+    <div class="localImage">
+      <img src="{{user.avatar}}" class="profileAvatar" alt="">
+    </div>
+    {{/if}}
+    <h4>{{user.username}}</h4>
+    <div class="mt-4">
+      <div class="d-flex flex-column align-items-center gap-3 mb-3 justify-content-center">
+        <button onclick="openFriendsData()" class="btn d-flex btn-success">
+          <h4>{{user.friends.length}} Amigo(s)</h4>
+        </button>
+        <div>
+          <h4>Grupos de {{user.username}}: </h4>
+          <hr>
+          <div>
+            <ul class="list-group groupsUser">
+              {{#each groupUser}}
+                <li class="list-group-item">
+                  <h4 class="d-flex align-items-center gap-3">{{this.groupName}}
+                    <span class="material-symbols-outlined">
+                      groups
+                    </span>
+                  </h4>
+                  <hr>
+                  <small><strong>Criado por:</strong> 
+                  {{#if (eq this.author.avatar "")}}
+                    <img src="/assets/images/anonymous.png" height="50px" alt="">
+                  {{else}}
+                    <img src="{{this.author.avatar}}" height="50px" alt="">
+                  {{/if}}
+                  <a class="link-info" href="/user/profile/{{this.author._id}}">{{this.author.username}}</a></small>
+                  <hr>
+                  <small><strong>Descrição:</strong> {{this.groupDescription}}</small>
+                </li>
+              {{else}}
+                <div class="d-flex justify-content-center text-light">
+                  <h4>{{../user.username}} ainda não participa de nenhum grupo!</h4>
+                </div>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
