@@ -237,13 +237,20 @@
         <ul class="list-group">
           {{!-- Lista de grupos --}}
           {{#each dataGroups}}
-          <a class="text-decoration-none" href="/user/group/{{this._id}}">
+          <a class="text-decoration-none text-light" href="/user/group/{{this._id}}">
             <li class="list-group-item itemGroup">
               <div class="dataGroup">
                 <h4>{{this.groupName}}</h4>
-                <small>
-                  Criador por: <strong>{{this.author.username}}</strong>
-                </small>
+                
+                  <strong>Criador por:
+                    {{#if (eq this.author.avatar "")}}
+                    <img src="/assets/images/anonymous.png" height="50px" alt="">
+                    <a class="text-light" href="/user/profile/{{this.author._id}}">{{this.author.username}}</a></small>
+                    {{else}}
+                      <img src="{{this.author.avatar}}" height="50px" alt="">
+                      <a class="text-light" href="/user/profile/{{this.author._id}}">{{this.author.username}}</a></small>
+                    {{/if}}
+                  </strong>
               </div>
               <hr>
               <p>

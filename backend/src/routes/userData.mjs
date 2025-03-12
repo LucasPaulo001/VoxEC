@@ -2,6 +2,7 @@ import { Router } from 'express'
 import isAuthenticated from '../configs/auth.mjs'
 import User from '../models/User.mjs'
 import Studies from '../models/Studies.mjs'
+import Group from '../models/Group.mjs'
 const { StudyTopic, StudyTask } = Studies
 const data = Router()
 
@@ -14,12 +15,18 @@ data.get('/profile/:idUser', isAuthenticated, (req, res) => {
     User.findById(idUser)
     .populate('friends', 'username email avatar')
     .then((user) => {
-        if(!user){
-            req.flash('error_msg', 'Usuário não encontrado!')
-            return res.redirect('/user/chat')
-        }
-        res.render('pages/userData', {
-            user: user
+        //Filtrando grupos em que o usuário participa
+        Group.find({members: idUser})
+        .populate('author', 'username avatar _id')
+        .then((groupUser) => {
+            if(!user){
+                req.flash('error_msg', 'Usuário não encontrado!')
+                return res.redirect('/user/chat')
+            }
+            res.render('pages/userData', {
+                user: user,
+                groupUser: groupUser
+            })
         })
     })
     .catch((error) => {
@@ -155,6 +162,7 @@ data.put('/studies/updateTask', (req, res) => {
         res.status(500).json({ error: "Erro no servidor." })
     })
 })
+
 
 
 

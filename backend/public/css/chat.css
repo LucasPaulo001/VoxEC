@@ -236,11 +236,6 @@ footer{
 .itemGroup:hover{
   background-color: #2922594b !important;
 }
-.dataGroup{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 .avatarContainer{
   gap: 15px;
   display: flex;

@@ -12,7 +12,7 @@ chat.get('/chat', isAuthenticated, (req, res) =>{
     //Buscando apenas grupos em que o usuário participa
     Group.find({members: req.user._id})
     //Populando os dados do author do grupo
-    .populate('author', 'username')
+    .populate('author', 'username avatar')
     .then((dataGroups) => {
         //Buscando Dados do usuário logado no bd
         User.findById(req.user._id)
@@ -21,7 +21,7 @@ chat.get('/chat', isAuthenticated, (req, res) =>{
         .populate('friends', 'username email avatar')
         .then((user) => {
             //Buscando apenas usuários que não são amigos do usuário logado para sugerir amizade
-            User.find({_id: {$nin: [...user.friends, user._id]}})
+            User.find({_id: {$nin: [...user.friends, user._id]}, emailVerificado: true})
             .select('username email avatar')
             .then((users) => {
                 //Renderizando a view e passando os dados filtrados

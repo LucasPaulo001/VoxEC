@@ -1,11 +1,14 @@
-.containerDataP{
-    height: 60vh;
+.containerDataP {
+    backdrop-filter: blur(1px);
+    padding: 20px;
+    background-color: #ffffff61;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     padding-bottom: 40px;
     margin: 10px;
+    border-radius: 10px;
 }
 .profileAvatar{
     height: 50%;
@@ -17,8 +20,8 @@
     justify-content: center;
 }
 .contentProfile{
-    height: 100vh;
-    padding: 20px;
+    display: flex;
+    justify-content: center;
 }
 .cardTopicStudies{
     margin: 10px;
@@ -166,8 +169,23 @@
 .localEdition form input{
     text-indent: 0;
 }
+.localImage{
+    height: 120px;
+    display: flex;
+    align-items: center;
+}
+.localImage img{
+    height: 100%;
+}
+.groupsUser{
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+}
 
 @media(max-width: 640px){
+    .contentProfile{
+        padding-bottom: 20%;
+    }
     .localEdition {
         width: 95%;
     }
