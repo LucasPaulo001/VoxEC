@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+*{
+    margin: 0%;
+    font-family: "Inter";
+    font-weight: 400;
+}
+#sobre{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #4630D9;
+    margin: 0%;
+    padding: 5vw 2vw;
+}
+#txt-sobre{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#ffff ;
+    color: #4630D9;
+    width: 22vw;
+    font-size: 3vw;
+    box-shadow: 4px 4px 1px rgba(0,0,0,0.5);
+    padding: 0.5vw 0vw;
+}
+#sobre h1{
+    margin: 4vw 0;
+    font-size: 2.3vw;
+    text-align: center;
+    color: #ffff;
+    width: 93vw;
+}
+#sobre img{
+    width: 35vw;
+    align-self: center;
+    transition:all 0.5s;
+}
+#sobre img:hover{
+    transform: scale(1.05);
+}
+#finalidade{
+    display: flex;
+    align-items: center;
+    gap: 10vw;
+    background-color: #ffffff;
+    margin: 0%;
+    padding: 6vw 2vw;
+}
+#finalidade img{
+    width: 20vw;
+}
+#txt-finalidade{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#4630D9;
+    color:white;
+    width: 26vw;
+    font-size: 3vw;
+    box-shadow: 4px 4px 1px rgba(0,0,0,0.5);
+    padding: 0.5vw 0vw;
+}
+#texts h1{
+    margin: 4vw 0;
+    font-size: 2.3vw;
+    width: 50vw;
+}
+#recursos{
+    display: flex;
+    flex-direction: column;
+    background-color: #4630D9;
+    margin: 0%;
+    padding: 6vw 2vw;
+}
+#txt-recursos{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#ffff ;
+    color: #4630D9;
+    width: 28vw;
+    font-size: 3vw;
+    box-shadow: 4px 4px 1px rgba(0,0,0,0.5);
+    padding: 0.5vw 0vw;
+}
+#recursos h1{
+    margin: 4vw 0;
+    color: #ffff;
+    font-size: 2.3vw;
+    width: auto;
+}
+#imgs-recursos{
+    display: flex;
+    justify-content: space-around;
+}
+#funcionamento{
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    margin: 0%;
+    padding: 6vw 2vw;
+}
+#txt-func{
+     display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:#4630D9 ;
+    color: #ffffff;
+    width: 28vw;
+    font-size: 3vw;
+    box-shadow: 4px 4px 1px rgba(0,0,0,0.5);
+    padding: 0.5vw 0vw;
+}
+#funcionamento h1{
+    margin: 4vw 0;
+    font-size: 2.3vw;
+    width:auto;
+}
+#funcionamento video{
+    border: 0.5vw solid #4630D9;
+    width: 75vw;
+    align-self: center;
+}
