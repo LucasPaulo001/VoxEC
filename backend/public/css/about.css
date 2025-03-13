@@ -93,6 +93,11 @@
 #imgs-recursos{
     display: flex;
     justify-content: space-around;
+    width: 100%;
+    height: 350px;
+}
+#imgs-recursos img{
+    height: 100%;
 }
 #funcionamento{
     display: flex;

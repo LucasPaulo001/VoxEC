@@ -4,6 +4,7 @@ const chat = Router()
 import isAuthenticated from "../configs/auth.mjs"
 import User from "../models/User.mjs"
 import bcrypt from "bcryptjs"
+import path from "path"
 
 //Rota para página inicial da aplicação
 chat.get('/chat', isAuthenticated, (req, res) =>{
@@ -282,5 +283,8 @@ chat.post('/modifyName/:idUser', isAuthenticated, (req, res) => {
     })
 })
 
+chat.get('/about', (req, res) => {
+    res.sendFile(path.join(process.cwd(), 'public', 'pages', 'about.html'))
+})
 
 export default chat
