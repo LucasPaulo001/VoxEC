@@ -69,7 +69,6 @@ body{
     flex-direction: column;
     justify-content: center;
     padding: 20px;
-    height: 100vh;
 }
 
 .logo{
@@ -83,12 +82,10 @@ body{
     align-items: center;
     flex-direction: column;
 }
-#logo{
-    background-color: var(--backgroun01);
-    border-radius: 20px;
-    margin-bottom: 30px;
+#logoMob{
+    display: none;
 }
-.logo a, #logo a{
+.logo a, #logoMob a{
     height: 100%;
     height: 100%;
     display: flex;
@@ -121,7 +118,7 @@ input{
     align-items: center;
 }
 #logo img{
-    height: 50%;
+    height: 100%;
     border-radius: 20px;
     animation: logoAnimated 1s ease-in-out infinite;
 }
@@ -148,5 +145,21 @@ input{
         width: 100%;
         border-radius: 20px;
         box-shadow: 1px 1px 20px 1px;
+    }
+    .login{
+        height: 100vh;
+    }
+    #logoMob{
+        background-color: var(--backgroun01);
+        border-radius: 20px;
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: center;
+        height: 300px;
+    }
+    #logoMob img{
+        height: 150px;
+        animation: logoAnimated infinite 2s ease-in-out;
+        border-radius: 15px;
     }
 }
