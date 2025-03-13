@@ -127,3 +127,13 @@
     width: 75vw;
     align-self: center;
 }
+
+@media(max-width: 640px){
+    #recursos{
+        height: 80vh;
+    }
+    #imgs-recursos{
+        flex-direction: column;
+        gap: 20px;
+    }
+}
