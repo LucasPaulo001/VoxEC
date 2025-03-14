@@ -56,26 +56,29 @@
       <div class="d-flex mb-3 justify-content-center"> 
         <h5>Adicione amigo(a) ao grupo: </h5>
       </div>
+      <div class="p-2 localF">
       {{#each friendsNotInGroup}}
-        <div class="localDataFriend">
-          <div>
-            <img src="{{this.avatar}}" height="50px" alt="">
-          </div>
-          <div>
-              {{this.username}}
-          </div>
-            <form action="/user/addMember/{{this._id}}" method="post">
-            <input type="hidden" value="{{../groupData._id}}" name="idGroup">
-              <div class="btns">
-                <button type="submit" class="btnAction">Add</button>
-              </div>
-            </form>
+        
+          <div class="localDataFriend">
+            <div>
+              <img src="{{this.avatar}}" height="50px" alt="">
+            </div>
+            <div>
+                {{this.username}}
+            </div>
+              <form action="/user/addMember/{{this._id}}" method="post">
+              <input type="hidden" value="{{../groupData._id}}" name="idGroup">
+                <div class="btns">
+                  <button type="submit" class="btnAction">Add</button>
+                </div>
+              </form>
         </div>
       {{else}}
         <div class="d-flex justify-content-center">
           <span class="text-danger">Todos os seus amigos já fazem parte deste grupo!</span>
         </div>
       {{/each}}
+      </div>
     </div>
   </div>
 

@@ -239,6 +239,12 @@
     align-items: center;
     gap: 30px;
 }
+.localdFriends, .window{
+    height: 90vh;
+}
+.localF{
+    overflow-y: auto;
+}
 @media(max-width: 680px){
     .dropdown-menu{
         flex-direction: column;
@@ -249,6 +255,7 @@
     }
     .localdFriends, .window{
         width: 95%;
+        height: 90vh;
     }
     .localChat {
         height: 80vh;
