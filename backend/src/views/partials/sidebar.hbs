@@ -112,29 +112,34 @@
       </div>
       <hr>
       {{!-- Nome do usuário --}}
-      <span class="d-flex justify-content-center"><strong>{{user.username}}</strong></span>
-      {{!-- Avatar do usuário --}}
-      <div class="d-flex perfilAvatar justify-content-center">
-        <img id="avatarImg" src="{{user.avatar}}" alt="" height="100%">
-      </div>
-
-      {{!-- Amigos --}}
-        <div class="mt-4">
-          <div class="d-flex mb-3 justify-content-center">
-            <button onclick="openFriendsData()" class="btn d-flex btn-success">
-              <h4>{{user.friends.length}} Amigo(s)</h4>
-            </button>
+      <div>
+        <span class="d-flex justify-content-center"><strong>{{user.username}}</strong></span>
+        {{!-- Avatar do usuário --}}
+        <div class="d-flex perfilAvatar justify-content-center">
+          {{#if (eq user.avatar "")}}
+            <img id="avatarImg" src="/assets/images/anonymous.png" alt="" height="100%">
+          {{else}}
+            <img id="avatarImg" src="{{user.avatar}}" alt="" height="100%">
+          {{/if}}
+        </div>
+        {{!-- Amigos --}}
+          <div class="mt-4">
+            <div class="d-flex mb-3 justify-content-center">
+              <button onclick="openFriendsData()" class="btn d-flex btn-success">
+                <h4>{{user.friends.length}} Amigo(s)</h4>
+              </button>
+            </div>
+            <div class="btns">
+            <a class="text-decoration-none" href="/user/studies/{{user._id}}">
+              <button class="btn d-flex gap-2 btn-light">Meus estudos
+                <span class="material-symbols-outlined">
+                  school
+                </span>
+              </button>
+            </a>
           </div>
-          <div class="btns">
-          <a class="text-decoration-none" href="/user/studies/{{user._id}}">
-            <button class="btn d-flex gap-2 btn-light">Meus estudos
-              <span class="material-symbols-outlined">
-                school
-              </span>
-            </button>
-          </a>
-        </div>
-        </div>
+          </div>
+      </div>
       <hr>
       
         {{!-- Notificações --}}
@@ -168,8 +173,8 @@
       <hr>
       {{!-- Amigos do usuário --}}
       {{#if users.length}}
-      <div class="d-flex localFriends mt-4 justify-content-center">
-        <div class="d-flex justify-content-center">
+      <div class="d-flex localFriends mt-4">
+        <div class="d-flex titleTop justify-content-center">
           <h4>Outros usuários</h4>
         </div>
         {{#each users}}
